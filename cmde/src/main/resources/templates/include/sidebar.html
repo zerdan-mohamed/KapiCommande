@@ -1,0 +1,26 @@
+<div class="a_nav-button-responsive" id="a_nav-button-responsive">
+            Menu <i class="ion-nav icon-round"></i>
+        </div>
+        <div class="a_nav" id="a_nav">
+            <div class="a_menu">
+                <a th:href="@{home}">
+                    <i class="ion-home"></i> <span>Home</span>
+                </a>
+            </div>
+
+            <div class="a_submenu" id="a_submenu">
+                <a th:href="@{monCompte}"><i class="ion-person"><span> Mon compte</span></i> </a>
+            </div>
+
+            <div class="a_submenu" id="a_submenu">
+                <a href="#"><i class="ion-ios7-cart"></i><span> Commande</span> <i class="ion-chevron-right a_right " id="icon"></i></a>
+                <div class="a_sub-content hide" id="a_sub-content">
+                    <form action="">
+	                    <a th:href="@{newCommande}"> Nouveau commande</a>
+	                    <a th:href="@{listeCommande}"> Liste commandes</a>
+	                    <a th:href="@{listeClient}">Liste client</a>
+	                    <a href="#"> Reglement</a>
+                    </form>
+                </div>
+            </div>
+        </div>

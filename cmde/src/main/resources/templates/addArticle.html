@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name='viewport'
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Login page</title>
+
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/bootstrap.css"
+	th:href="@{/src/css/bootstrap.css}" />
+
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/bootstrap-datepicker.css"
+	th:href="@{src/css/bootstrap-datepicker.css}" />
+
+<link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
+	th:href="@{/src/css/app.css}" />
+
+<link rel="stylesheet" type="text/css"
+	href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
+	th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}" />
+
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/fontawesome.css"
+	th:href="@{/src/css/fontawesome.css}" />
+
+<link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
+	th:href="@{/src/css/all.css}" />
+
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/cmdeStyle.css"
+	th:href="@{/src/css/cmdeStyle.css}" />
+
+</head>
+<body>
+	<!-- *** Debut header *** -->
+	<div lang="en" th:include="include/header"></div>
+	<!-- *** Fin header *** -->
+
+	<!-- *** Debut menu sidebar *** -->
+	<div lang="en" th:include="include/sidebar"></div>
+	<!-- *** Fin menu sidebar *** -->
+
+	<!-- *** Debut dashboard content *** -->
+	<div class="a_content">
+
+		<div class="alert alert-secondary" role="alert">
+			SAP systeme <i class="ion-ios7-arrow-forward"> </i> Nouveau commande
+		</div>
+
+		<!-- *** Debut nouveau commande *** -->
+		<div class="card">
+			<div class="card-header">
+				<i class="fas fa-info-circle"></i> Commande N° <span
+					th:text="${numCmdeAc}"></span>
+			</div>
+
+			<!-- *** Debut card body *** -->
+			<div class="card-body cmde_font">
+				<!-- *** Debut client information *** -->
+				<div class="row" id="infoClient">
+					<div class="col-md-12">
+						<form th:action="@{/createCmde}" method="post">
+							<!-- Info Client - 2er ligne -->
+							<div class="row">
+								<div class="col-md-3">
+									<ul id="info_client">
+										<li id="numCmde" th:value="${numCmdeAc}"
+											th:text="'Num Commande : ' + ${numCmdeAc}"></li>
+										<li id="nomClient" th:value="${client.nomClient}"
+											th:text="'Nom Client : ' + ${client.nomClient} + ' ' + ${client.prenomClient}"></li>
+										<li id="telClient" th:value="${client.telClient}"
+											th:text="'Telephone Client : ' + ${client.telClient}"></li>
+									</ul>
+									<hr>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<!-- *** Fin client information  *** -->
+
+				<br>
+
+				<!-- *** Debut table commande *** -->
+				<form th:action="@{/saveLCmde}" method="post" id="lCmdeForm">
+				<div class="row" id="addArticle">
+					<div class="col-md-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">Designation</th>
+									<th scope="col">Prix TTC</th>
+									<th scope="col">Tva</th>
+									<th scope="col">Quantité</th>
+									<th scope="col">Remise</th>
+									<th scope="col">Total</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:field="*{listArticles}">
+									<td>
+										<select class="custom-select" id="selectArticle" name="selectArtice" style="height: 30px; width: 200px;">
+											<option value="">Selectionner un article</option>
+											<option th:each="article : ${listArticles}" id="selectArt"
+												th:text="${article.libelleArticle}"
+												th:value="${article.idArticle}" />
+										</select>
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+
+								<tr id="artSelected"> <!--   style="display: none;" -->
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="libelArticle" name="libelArticle" />
+									</td>
+									
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="prix" name="prix" />
+									</td>
+										
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="tva" name="tva"/>
+									</td>
+
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="quantite" name="quantite" />
+									</td>
+
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="remise" name="remise" />
+									</td>
+									
+									<td>
+										<input type="text" class="form-control" id="idCmdeActuel" name="idCmdeActuel" 
+												th:value="${idCmde}" th:text="${idCmde}" />
+									</td>
+									
+									<td>
+										<button type="submit" class="btn btn-success btn-sm">
+											<i class="fas fa-plus-circle"></i>
+										</button>
+									</td>
+									
+									<!-- <span class="btn btn-success btn-sm"> <i class="fas fa-plus-circle"></i> </span> -->
+									
+									<td><input type="text" style="display:none"
+										class="form-control" id="idA" name="idA" />
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				</form>
+				<!-- *** Fin table commande *** -->
+
+				<br>
+
+				<!-- *** Debut facture total *** -->
+				<div class="row" style="display: none;">
+					<div class="col-md-12">
+						<!-- total facture - 1er ligne -->
+						<div class="row">
+							<div class="col-md-3">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="firstName" placeholder="Commercial : Mohamed zerdan"
+									disabled="disabled" />
+							</div>
+
+							<div class="col-md-3 offset-md-6">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="totalAR" placeholder=""
+									value="Total avant remise : 2500000 dhs" disabled />
+							</div>
+						</div>
+
+						<!-- total facture - 2er ligne -->
+						<div class="row">
+							<div class="col-md-3 offset-md-9">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="remise" placeholder="Remise" />
+							</div>
+						</div>
+
+						<!-- total facture - 3er ligne -->
+						<div class="row">
+							<div class="col-md-3 offset-md-9">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="firstName" placeholder="Fret" />
+							</div>
+						</div>
+
+						<!-- total facture - 4er ligne -->
+						<div class="row">
+							<div class="col-md-3 offset-md-9">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="firstName" placeholder="Arrondi" />
+							</div>
+						</div>
+
+						<!-- total facture - 5er ligne -->
+						<div class="row">
+							<div class="col-md-3 offset-md-9">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="firstName" placeholder="TVA" />
+							</div>
+						</div>
+
+						<!-- total facture - 6er ligne -->
+						<div class="row">
+							<div class="col-md-3 offset-md-9">
+								<input type="text" style="height: 24px;" class="form-control"
+									id="firstName" placeholder="Total" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- *** Fin facture total *** -->
+			</div>
+			<!-- *** Fin card body *** -->
+		</div>
+		<!-- *** Debut nouveau commande *** -->
+	</div>
+	<!-- *** Fin dashboard content *** -->
+
+	<!-- *** Debut dashboard footer *** -->
+	<div lang="en" th:include="include/footer"></div>
+	<!-- *** Fin dashboard footer *** -->
+</body>
+
+<!-- *** JQuery bibliotheque *** -->
+<script src="../static/src/js/jquery-3.3.1.js"
+	th:src="@{/src/js/jquery-3.3.1.js}"></script>
+
+<!-- *** Afficher sous menu *** -->
+<script type="text/javascript" src="../static/src/js/app.js"
+	th:src="@{/src/js/app.js}"></script>
+
+<!-- *** Bootstrap bibliotheque *** -->
+<script defer src="../static/src/js/bootstrap.js"
+	th:src="@{/src/js/bootstrap.js}"></script>
+
+<!-- *** Fontawesome icons bibliotheque *** -->
+<script type="text/javascript" src="../static/src/js/fontawesome.js"
+	th:src="@{/src/js/fontawesome.js}"></script>
+
+<!-- *** internal js file *** -->
+<script type="text/javascript" src="../static/src/js/all.js"
+	th:src="@{/src/js/all.js}"></script>
+
+<!-- *** internal js file *** -->
+<script type="text/javascript" src="../static/src/js/modal.js"
+	th:src="@{/src/js/modal.js}"></script>
+	
+<!-- *** Ajax POST ligne commande *** -->
+<script type="text/javascript" src="../static/src/js/articleAjax.js"
+	th:src="@{/src/js/articleAjax.js}"></script>	
+
+</html>

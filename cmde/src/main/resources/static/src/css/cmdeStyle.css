@@ -1,0 +1,50 @@
+/* Home style */
+
+.div_stat {
+	margin-bottom: 15px;
+}
+
+.rec_stat {
+	border-right: 2px solid #fff;
+}
+
+.home_stat p {
+	color: #fff;
+	padding: 0px;
+}
+
+.ste_info p {
+	text-align: justify;
+}
+
+.mot_dir p {
+	text-align: justify;
+}
+
+
+/* NewCommande style */
+.cmde_font {
+	font-size: 12px;	
+}
+
+.cmde_font input {
+	font-size: 12px;
+	height: 30px;
+}
+
+
+/* AddArticle */
+
+#info_client li {
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+
+
+
+
+
+
+

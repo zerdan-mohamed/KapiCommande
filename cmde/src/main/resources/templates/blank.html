@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Login page</title>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap.css"
+        				th:href="@{/src/css/bootstrap.css}"/>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap-datepicker.css" 
+        				th:href="@{src/css/bootstrap-datepicker.css}"/>
+
+        <link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
+						th:href="@{/src/css/app.css}"/>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
+        				th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}"/>
+        
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
+        				rel='stylesheet' type='text/css'/>
+        
+		<link rel="stylesheet" type="text/css" href="../static/src/css/fontawesome.css"
+        				th:href="@{/src/css/fontawesome.css}"/>
+        
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
+        				th:href="@{/src/css/all.css}"/>
+        
+    </head>
+    <body>
+		<!-- *** Debut header *** -->
+        	<div lang="en" th:include="include/header"></div>
+        <!-- *** Fin header *** -->
+
+        <!-- *** Debut menu sidebar *** -->
+        	<div lang="en" th:include="include/sidebar"></div>
+        <!-- *** Fin menu sidebar *** -->
+
+        <!-- *** Debut dashboard content *** -->
+        <div class="a_content">
+
+            <div class="alert alert-secondary" role="alert">
+                SAP systeme  <i class="ion-ios7-arrow-forward"> </i>
+            </div>
+
+            <!-- *** Debut nouveau commande *** -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle"></i> card title
+                </div>
+
+                <!-- *** Debut card body *** -->
+                <div class="card-body">
+                    <!-- *** Debut info client - Livraison *** -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                              		<!-- <div lang="en" th:include="Navbar :: Navbar"></div> --> 
+                              		<!-- <div lang="en" th:include="Navbar"></div> -->     
+                                </div>
+
+                                <div class="col-md-3 offset-md-6">
+                                    
+                                </div>
+                            </div>
+
+						</div>
+                    </div>
+                    <!-- *** Fin info client - Livraison *** -->
+
+                    <br>
+
+                </div>
+                <!-- *** Fin card body *** -->
+            </div>
+            <!-- *** Debut nouveau commande *** -->
+        </div>
+        <!-- *** Fin dashboard content *** -->
+
+        <!-- *** Debut dashboard footer *** -->
+			<div lang="en" th:include="include/footer"></div>         
+        <!-- *** Fin dashboard footer *** -->
+    </body>
+
+    <!-- *** JQuery bibliotheque *** -->
+    <script src="../static/src/js/jquery-3.3.1.js"
+    		th:src="@{/src/js/jquery-3.3.1.js}"></script>
+
+	<!-- *** Afficher sous menu *** -->
+    <script type="text/javascript" src="../static/src/js/app.js"
+    		th:src="@{/src/js/app.js}"></script>
+
+    <!-- *** Bootstrap bibliotheque *** -->
+    <script defer src="../static/src/js/bootstrap.js"
+    		th:src="@{/src/js/bootstrap.js}"></script>
+     	
+    <!-- *** Fontawesome icons bibliotheque *** -->
+    <script type="text/javascript" src="../static/src/js/fontawesome.js"
+    		th:src="@{/src/js/fontawesome.js}"></script>
+    
+    <!-- *** internal js file *** -->
+    <script type="text/javascript" src="../static/src/js/all.js"
+    	th:src="@{/src/js/all.js}"></script>
+        	    
+</html>
+    

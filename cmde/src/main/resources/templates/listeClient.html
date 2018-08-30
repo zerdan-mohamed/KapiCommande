@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> -->
+        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Login page</title>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap.css"
+        				th:href="@{/src/css/bootstrap.css}"/>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap-datepicker.css" 
+        				th:href="@{src/css/bootstrap-datepicker.css}"/>
+
+        <link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
+						th:href="@{/src/css/app.css}"/>
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
+        				th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}"/>
+        
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
+        				rel='stylesheet' type='text/css'/>
+        
+		<link rel="stylesheet" type="text/css" href="../static/src/css/fontawesome.css"
+        				th:href="@{/src/css/fontawesome.css}"/>
+        
+        
+        <link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
+        				th:href="@{/src/css/all.css}"/>
+        
+    </head>
+    <body>
+		<!-- *** Debut header *** -->
+        	<div lang="en" th:include="include/header"></div>
+        <!-- *** Fin header *** -->
+
+        <!-- *** Debut menu sidebar *** -->
+        	<div lang="en" th:include="include/sidebar"></div>
+        <!-- *** Fin menu sidebar *** -->
+
+        <!-- *** Debut dashboard content *** -->
+        <div class="a_content">
+
+            <div class="alert alert-secondary" role="alert">
+                SAP systeme  <i class="ion-ios7-arrow-forward"> </i> Gestion des clients
+            </div>
+
+            <!-- *** Debut nouveau commande *** -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle"></i> Liste des clients
+                    
+                    <a class="btn-sm btn-success" style="float: right" th:href="@{addClient}"><i class="fas fa-plus-circle"></i></a>
+                </div>
+
+				<!-- *** Debut card body *** -->
+		        <div class="card-body">
+		            
+		            <form th:action="@{listeClient}" method="get">
+		            <div class="input-group mb-3 col-md-4 col-xs-6 col-lg-4">
+					  <input type="text" name="motCle" th:value="${motCle}" class="form-control" placeholder="Chercher client" aria-label="Recipient's client" aria-describedby="basic-addon2">
+					  <div class="input-group-append">
+					    <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i> Chercher</button>
+					  </div>
+					</div>
+					</form>
+		            
+		            <!-- *** Debut table client *** -->
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <table class="table table-striped">
+		                        <thead>
+		                        <tr>
+		                            <th scope="col">Nom</th>
+		                            <th scope="col">Prenom</th>
+		                            <th scope="col">Ville</th>
+		                            <th scope="col">Telephone</th>
+		                            <th scope="col">Email</th>
+		                            <th scope="col"></th>
+		                        </tr>
+		                        </thead>
+		                        <tbody>
+			                        <tr th:each="c:${pageClients.content}">
+			                            <th th:text="${c.nomClient}" scope="row"> </th> 
+			                            <td th:text="${c.prenomClient}"> </td> 
+			                            <td th:text="${c.villeClient}"> </td>
+			                            <td th:text="${c.telClient}"> </td>
+			                            <td th:text="${c.mailClient}"> </td>
+			                            
+			                           <!-- edit- client btn  -->
+			                           <td>
+											<!-- Edit client btn  -->		
+			                            	<!-- <a th:href="@{findClient(idClient=${c.idClient})}" class="btn btn-sm btn-success editBtn">
+			                           			<i class="fas fa-edit"></i>
+			                           		</a> -->
+			                            	
+			                            	<a th:href="@{findClient(idClient=${c.idClient})}" class="btn btn-sm btn-success">
+			                           			<i class="fas fa-edit"></i>
+			                           		</a>
+			                            	
+			                            	
+			                            	<!-- Delete client btn  -->
+			                           		<a th:href="@{delClient(idClient=${c.idClient})}" class="btn btn-sm btn-danger delBtn">
+			                           			<i class="fas fa-trash-alt"></i>
+			                           		</a>
+			                           </td>
+			                           
+			                        </tr>
+		                        </tbody>
+		                    </table>
+		                    <br>
+		                </div>
+		                
+		                
+		                <!-- pagination liste client -->
+		                <div style="justify-content: right;">
+			                <nav aria-label="Page navigation example" class="navbar navbar-toggleable-md navbar-light bg-faded">
+			                	<ul class="pagination nav nav-pills">
+			                		<li class="nav-item" th:classappend="${p}==${pageCourante}? 'active':''" th:each="p:${pages}" >						
+			                			<a class="page-link" th:classappend="${p}==${pageCourante}? 'active':''" th:text="${p}" th:href="@{listeClient(page=${p},motCle=${motCle})}"></a>
+			                		</li>
+			                	</ul>
+			                </nav>
+		                </div>
+		                
+		            </div>
+		            <!-- *** Fin table commande *** -->
+		
+		        </div>
+		        <!-- *** Fin card body *** -->
+                                
+            </div>
+            <!-- *** Debut nouveau commande *** -->
+        </div>
+        <!-- *** Fin dashboard content *** -->
+
+        <!-- *** Debut dashboard footer *** -->
+			<div lang="en" th:include="include/footer"></div>         
+        <!-- *** Fin dashboard footer *** -->
+        
+        
+        
+        <!-- *** Modal gestion des client *** -->
+        
+	        <!-- Modal delete client -->
+			<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      
+			      <div class="modal-header bg-danger border-danger" style="color: #fff;">
+				    <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-trash-alt"></i> Supprimer client</h5>
+				  	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				    	<span aria-hidden="true">&times;</span>
+				    </button>
+				  </div>
+				      
+			      <div class="modal-body">
+			        <h3> Voulez-vous vraiment supprimer cet utilisateur ?</h3>
+			      </div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal"> Non </button> <!-- btn-default -->
+			        <a href="" class="btn btn-sm btn-danger" id="delRef"> Oui </a>
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>    
+		    
+		    <!-- Modal edit client -->
+		    <form th:action="@{/saveClient}" method="post">
+		    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header bg-success border-success" style="color: #fff;">
+			        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-trash-alt"></i> edit client</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Id :</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" id="id" name="id" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+			          
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Nom :</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+				          
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Prenom:</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" id="prenomClient" name="prenomClient" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+			          
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Ville :</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" id="villeClient" name="villeClient" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+			          
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Telephone :</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" id="telClient" name="telClient" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+			          
+			          <div class="form-group row">
+			            <label for="idClient" class="col-sm-3 col-form-label">Email :</label>
+			            <div class="col-sm-9">
+			            	<input type="text" class="form-control" id="mailClient" name="mailClient" value="" />
+			            </div>
+			            <span class="text-danger"></span>
+			          </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Exit</button>
+			        <input type="submit" class="btn btn-sm btn-success" value="Edit" />					
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		    </form>
+		    
+    </body>
+
+    <!-- *** JQuery bibliotheque *** -->
+    <script src="../static/src/js/jquery-3.3.1.js"
+    		th:src="@{/src/js/jquery-3.3.1.js}"></script>
+
+	<!-- *** Afficher sous menu *** -->
+    <script type="text/javascript" src="../static/src/js/app.js"
+    		th:src="@{/src/js/app.js}"></script>
+    		
+    <!-- *** Afficher sous menu *** -->
+    <script type="text/javascript" src="../static/src/js/modal.js"
+    		th:src="@{/src/js/modal.js}"></script>		
+
+    <!-- *** Bootstrap bibliotheque *** -->
+    <script defer src="../static/src/js/bootstrap.js"
+    		th:src="@{/src/js/bootstrap.js}"></script>
+     	
+    <!-- *** Fontawesome icons bibliotheque *** -->
+    <script type="text/javascript" src="../static/src/js/fontawesome.js"
+    		th:src="@{/src/js/fontawesome.js}"></script>
+    
+    <!-- *** internal js file *** -->
+    <script type="text/javascript" src="../static/src/js/all.js"
+    	th:src="@{/src/js/all.js}"></script>
+        	    
+</html>
