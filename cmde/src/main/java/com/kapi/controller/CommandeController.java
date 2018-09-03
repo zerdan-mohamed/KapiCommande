@@ -89,7 +89,7 @@ public class CommandeController {
 	  }
 
 
-		
+	// *** Create new commande *** 
 	@RequestMapping(value="/listeCommande", method=RequestMethod.GET)
 	public String listeCommande(Model model,
 			@RequestParam(name="page", defaultValue="0")int p,

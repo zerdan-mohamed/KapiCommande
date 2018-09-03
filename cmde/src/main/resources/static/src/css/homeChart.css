@@ -1,0 +1,54 @@
+.chart-container .pr-chart-ctrl {
+	display: block;
+	float: left;
+	width: 25%;
+}
+
+.chart-container .pr-chart-ctrl .pr-chart {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: 0 0 20px 0;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.chart-container .pr-chart-ctrl .pr-chart canvas {
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	vertical-align: center;
+}
+
+.chart-container .pr-chart-ctrl .pr-chart i {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	line-height: 200px;
+	font-size: 48px;
+	font-style: normal;
+	color: #808080;
+}
+
+.chart-container .pr-chart-ctrl p {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+	color: green;
+}
+
+@media screen and (max-width:500px) {
+	.chart-container .pr-chart-ctrl {
+		width: 100%;
+		margin-bottom: 50px;
+	}
+}
+
+@media screen and (min-width:501px) and (max-width:900px) {
+	.chart-container .pr-chart-ctrl {
+		width: 50%;
+		margin-bottom: 50px;
+	}
+}

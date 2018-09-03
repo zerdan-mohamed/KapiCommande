@@ -1,201 +1,182 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <title>Login page</title>
-        
-        <link rel="stylesheet" href="../static/src/css/bootstrap.css"
-        					   th:href="@{/src/css/bootstrap.css}"/>
-        
-        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap-datepicker.css" 
-        th:href="@{src/css/bootstrap-datepicker.css}"/>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name='viewport'
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>Login page</title>
 
-        <link rel="stylesheet" href="../static/src/css/app.css"
-        th:href="@{/src/css/app.css}"/>
-        
-        <link rel="stylesheet" href="../static/src/css/cmdeStyle.css"
-        th:href="@{/src/css/cmdeStyle.css}"/>
-        
-        <link rel="stylesheet" href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
-        th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}"/>
-        
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
-        rel='stylesheet' type='text/css'/>
-        
-		<link rel="stylesheet" href="../static/src/css/fontawesome.css"
-        th:href="@{/src/css/fontawesome.css}"/>
-        
-        
-        <link rel="stylesheet" href="../static/src/css/all.css"
-        th:href="@{/src/css/all.css}"/>
-        
-    </head>
-    <body>
-		<!-- *** Debut header *** -->
-        	<div lang="en" th:include="include/header"></div>
-        <!-- *** Fin header *** -->
+<link rel="stylesheet" href="../static/src/css/bootstrap.css"
+	th:href="@{/src/css/bootstrap.css}" />
 
-        <!-- *** Debut menu sidebar *** -->
-        	<div lang="en" th:include="include/sidebar"></div>
-        <!-- *** Fin menu sidebar *** -->
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/bootstrap-datepicker.css"
+	th:href="@{src/css/bootstrap-datepicker.css}" />
 
-        <!-- *** Debut dashboard content *** -->
-        <div class="a_content">
+<link rel="stylesheet" href="../static/src/css/app.css"
+	th:href="@{/src/css/app.css}" />
 
-            <!-- <div class="alert alert-secondary" role="alert">
+<link rel="stylesheet" href="../static/src/css/cmdeStyle.css"
+	th:href="@{/src/css/cmdeStyle.css}" />
+
+<link rel="stylesheet"
+	href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
+	th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}" />
+
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css' />
+
+<link rel="stylesheet" href="../static/src/css/fontawesome.css"
+	th:href="@{/src/css/fontawesome.css}" />
+
+
+<link rel="stylesheet" href="../static/src/css/all.css"
+	th:href="@{/src/css/all.css}" />
+	
+<link rel="stylesheet" href="../static/src/css/homeChart.css"
+	th:href="@{/src/css/homeChart.css}" />
+
+</head>
+<body>
+	<!-- *** Debut header *** -->
+	<div lang="en" th:include="include/header"></div>
+	<!-- *** Fin header *** -->
+
+	<!-- *** Debut menu sidebar *** -->
+	<div lang="en" th:include="include/sidebar"></div>
+	<!-- *** Fin menu sidebar *** -->
+
+	<!-- *** Debut dashboard content *** -->
+	<div class="a_content">
+
+		<!-- <div class="alert alert-secondary" role="alert">
                 SAP systeme  <i class="ion-ios7-arrow-forward"> Bienvenue</i>
             </div> -->
 
-            <!-- *** Debut home content *** -->
-            <div class="container-fluid div_stat">
-	            <!-- statistic general -->
-	            <div class="row home_stat">
-	            	<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 rec_stat" style="background-color: #0F62c8"> <!-- margin-left: 15px; -->
-	            		<div class="row">
-	            			<div class="col-md-4" style="background-color: #36a3ff; padding-bottom: 15px;">
-	            				<i class="fas fa-user" style="font-size: 40px; color: #fff; margin-top: 15px; margin-left: 10px;"></i>
-	            			</div>
-	            			
-	            			<div class="col-md-8" style="font-size: 30px; background-color: #2494f2;">
-	            				<!-- <p> 100 Clients</p> -->
-	            				<label th:text="${code}"> </label>
-	            			</div>
-	            		</div>
-	            	</div>
-	            	
-	            	<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 rec_stat" style="background-color: #0F62c8"> <!-- margin-left: 15px; -->
-	            		<div class="row">
-	            			<div class="col-md-4" style="background-color: #36a3ff;">
-	            				<i class="fas fa-shopping-cart" style="font-size: 40px; color: #fff; margin-top: 15px; margin-left: 10px;"></i>
-	            			</div>
-	            			
-	            			<div class="col-md-8" style="font-size: 30px; background-color: #2494f2;">
-	            				<!-- <p>Nombre commandes livrée : 356</p> -->
-	            			</div>
-	            		</div>
-	            	</div>
-	            	
-	            	<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 rec_stat" style="background-color: #0F62c8">
-	            		<div class="row">
-	            			<div class="col-md-4" style="background-color: #36a3ff;">
-	            				<i class="fas fa-shopping-cart" style="font-size: 40px; color: #fff; margin-top: 15px; margin-left: 10px;"></i>
-	            			</div>
-	            			
-	            			<div class="col-md-8" style="font-size: 30px; background-color: #2494f2;">
-	            				<!-- <p>Nombre commandes en cours : 42</p> -->
-	            			</div>
-	            		</div>
-	            	</div>
-	            	
-	            	<div class="col-md-3 col-lg-3 col-sm-6 col-xs-12 rec_stat" style="background-color: #0F62c8">
-	            		<div class="row">
-	            			<div class="col-md-4" style="background-color: #36a3ff;">
-	            				<i class="fas fa-dollar-sign" style="font-size: 40px; color: #fff; margin-top: 15px; margin-left: 10px;"></i>
-	            			</div>
-	            			
-	            			<div class="col-md-8" style="font-size: 30px; background-color: #2494f2;">
-	            				<!-- 12600 Dhs -->
-	            			</div>
-	            		</div>
-	            	</div>
-	            </div>
-            </div>
-            
-            <div class="row">
-            	<div class="col-md-9">
-		            <div class="card">
-		                <div class="card-header">
-		                    <i class="fas fa-info-circle"></i> Bienvenue mohamed
-		                </div>
-		
-		                <!-- *** Debut card body *** -->
-		                <div class="card-body ste_info">
-		                	
-		                	<h1>A PROPOS</h1>
-		                    <p> <b>KAPISOFT</b> est une société de services spécialisée dans les systèmes d’informations et la mise en œuvre de solutions
-		                        intégrées (solutions ERP) à destination des PME et des PMI. Nous accompagnons nos clients sur toutes les phases de
-		                        leurs projets, mais aussi au cours de l’exploitation de leurs solutions: Diagnostic. Analyse des processus de
-		                        l’entreprise. Conception de la solution. Développement des personnalisations requises Déploiement, formations
-		                        et conduite du changements Maintenance de la solution Notre politique s’appuie sur un fondement : l’adéquation 
-		                        de nos ressources aux besoins sectoriels de nos clients.</p>
-		                    
-		                    <h1>SERVICES</h1>
-		                    
-		                    <ul class="ist-group list-group-flush">
-							  <li class="list-group-item"> ERP ET LOGICIEL DE GESTION </li>
-							  <li class="list-group-item"> WEB ET APPLICATION MOBILE </li>
-							  <li class="list-group-item"> SYSTÈME ET SÉCURITÉ </li>
-					  		  <li class="list-group-item"> RÉSEAUX ET TÉLECOMS </li>
-							</ul>
-		                </div>
-		                <!-- *** Fin card body *** -->
-		    		</div>
-		    	</div>
-		    		
-		    		<!-- *** Debut card solde *** -->
-		    	<div class="col-md-3">
-		    		<div class="row">
-			    		<div class="col-md-12">
-				    		<div class="card mot_dir" style="margin-bottom: 10px;">
-								<h5 class="card-header"><i class="fas fa-comment"></i> Mot du directeur</h5>
-							  	<div class="card-body">
-							    	<h5 class="card-title"></h5>
-							    	<p class="card-text">
-							    		La qualité n'est pas seulement la mise en oeuvre d'un savoir faire technique ou le respect d'une regle,
-							    		mais la prise en compte du besoin client dans son expérience singulière"
-							    	</p>
-							  	</div>
+		<!-- *** Debut home content *** -->
+		<div class="container-fluid div_stat">
+			<!-- statistic general -->
+			<div class="row home_stat">
+				<div class="col-md-12">
+					<ul class="chart-container">
+						<li class="pr-chart-ctrl">
+							<div class="pr-chart" data-percent="100">
+									
+							</div> 
+						</li>
+						<li class="pr-chart-ctrl">
+							<div class="pr-chart" data-percent="100">
+								
+							</div>
+						</li>
+						<li class="pr-chart-ctrl">
+							<div class="pr-chart" data-percent="100">
+								
+							</div>
+						</li>
+						<li class="pr-chart-ctrl">
+							<div class="pr-chart" data-percent="100">
+								
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-header">
+						<i class="fas fa-info-circle"></i> Bienvenue mohamed
+					</div>
+
+					<!-- *** Debut card body *** -->
+					<div class="card-body ste_info"></div>
+					<!-- *** Fin card body *** -->
+				</div>
+			</div>
+
+			<!-- *** Debut card solde *** -->
+			<div class="col-md-3">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card mot_dir" style="margin-bottom: 10px;">
+							<h5 class="card-header">
+								<i class="fas fa-comment"></i> Mot du directeur
+							</h5>
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">La qualité n'est pas seulement la mise
+									en oeuvre d'un savoir faire technique ou le respect d'une
+									regle, mais la prise en compte du besoin client dans son
+									expérience singulière"</p>
 							</div>
 						</div>
-					
-						<div class="col-md-12">
-							<div class="card mot_dir">
-								<h5 class="card-header"><i class="fas fa-comments"></i> Contact</h5>
-						  		<div class="card-body">
-						    		<h5 class="card-title"></h5>
-						    		
-						    		<ul>
-						    			<li style="margin-bottom: 10px;"> <i class="fas fa-map-marker-alt"></i> Ben M'sik Casablanca </li>
-						    			<li style="margin-bottom: 10px;"> <i class="fas fa-envelope"></i> contact@kapisoft.ma </li>
-						    			<li style="margin-bottom: 10px;"> <i class="fas fa-phone-square"></i> +212(0)667872526 </li>
-						    		</ul>
-						    		
-						  		</div>
+					</div>
+
+					<div class="col-md-12">
+						<div class="card mot_dir">
+							<h5 class="card-header">
+								<i class="fas fa-comments"></i> Contact
+							</h5>
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+
+								<ul>
+									<li style="margin-bottom: 10px;"><i
+										class="fas fa-map-marker-alt"></i> Ben M'sik Casablanca</li>
+									<li style="margin-bottom: 10px;"><i
+										class="fas fa-envelope"></i> contact@kapisoft.ma</li>
+									<li style="margin-bottom: 10px;"><i
+										class="fas fa-phone-square"></i> +212(0)667872526</li>
+								</ul>
+
 							</div>
 						</div>
 					</div>
 				</div>
-            </div>
-            <!-- *** Debut home content *** -->
-            
-        </div>
-        <!-- *** Fin dashboard content *** -->
+			</div>
+		</div>
+		<!-- *** Debut home content *** -->
 
-        <!-- *** Debut dashboard footer *** -->
-			<div lang="en" th:include="include/footer"></div>         
-        <!-- *** Fin dashboard footer *** -->
-    </body>
+	</div>
+	<!-- *** Fin dashboard content *** -->
 
-    <!-- *** JQuery bibliotheque *** -->
-    <script src="../static/src/js/jquery-3.3.1.js"
-    		th:src="@{/src/js/jquery-3.3.1.js}"></script>
+	<!-- *** Debut dashboard footer *** -->
+	<div lang="en" th:include="include/footer"></div>
+	<!-- *** Fin dashboard footer *** -->
+</body>
 
-	<!-- *** Afficher sous menu *** -->
-    <script type="text/javascript" src="../static/src/js/app.js"
-    		th:src="@{/src/js/app.js}"></script>
+<!-- *** JQuery bibliotheque *** -->
+<script src="../static/src/js/jquery-3.3.1.js"
+	th:src="@{/src/js/jquery-3.3.1.js}"></script>
 
-    <!-- *** Bootstrap bibliotheque *** -->
-    <script defer src="../static/src/js/bootstrap.js"
-    		th:src="@{/src/js/bootstrap.js}"></script>
-     	
-    <!-- *** Fontawesome icons bibliotheque *** -->
-    <script type="text/javascript" src="../static/src/js/fontawesome.js"
-    		th:src="@{/src/js/fontawesome.js}"></script>
-    
-    <!-- *** internal js file *** -->
-    <script type="text/javascript" src="../static/src/js/all.js"
-    	th:src="@{/src/js/all.js}"></script>
-        	    
+<!-- *** Afficher sous menu *** -->
+<script type="text/javascript" src="../static/src/js/app.js"
+	th:src="@{/src/js/app.js}"></script>
+
+<!-- *** Bootstrap bibliotheque *** -->
+<script defer src="../static/src/js/bootstrap.js"
+	th:src="@{/src/js/bootstrap.js}"></script>
+
+<!-- *** Fontawesome icons bibliotheque *** -->
+<script type="text/javascript" src="../static/src/js/fontawesome.js"
+	th:src="@{/src/js/fontawesome.js}"></script>
+
+<!-- *** internal js file *** -->
+<script type="text/javascript" src="../static/src/js/all.js"
+	th:src="@{/src/js/all.js}"></script>
+
+<!-- *** JQuery easypiechart plugin *** -->
+<script type="text/javascript"
+	src="../static/src/js/jquery.easypiechart.min.js"
+	th:src="@{/src/js/jquery.easypiechart.min.js}"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+
+
+
+
 </html>
-    
