@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name='viewport'
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>Login page</title>
+<title>Home page</title>
 
 <link rel="stylesheet" href="../static/src/css/bootstrap.css"
 	th:href="@{/src/css/bootstrap.css}" />
@@ -33,7 +33,7 @@
 
 <link rel="stylesheet" href="../static/src/css/all.css"
 	th:href="@{/src/css/all.css}" />
-	
+
 <link rel="stylesheet" href="../static/src/css/homeChart.css"
 	th:href="@{/src/css/homeChart.css}" />
 
@@ -59,85 +59,89 @@
 			<!-- statistic general -->
 			<div class="row home_stat">
 				<div class="col-md-12">
-					<ul class="chart-container">
-						<li class="pr-chart-ctrl">
-							<div class="pr-chart" data-percent="100">
-									
-							</div> 
-						</li>
-						<li class="pr-chart-ctrl">
-							<div class="pr-chart" data-percent="100">
-								
+					<div class="row">
+						<div class="col-md-3 col-sm-6 padZero">
+							<div class="card card-stat">
+								<div class="media">
+									<div class="media-left meida media-middle media-stat">
+										<span><i class="fas fa-user"></i></span>
+									</div>
+									<div class="media-body media-text-right">
+										<h1 class="float-right">
+											<span th:text="${nbClients}"></span>CLIENTS
+										</h1>
+									</div>
+								</div>
 							</div>
-						</li>
-						<li class="pr-chart-ctrl">
-							<div class="pr-chart" data-percent="100">
-								
+						</div>
+
+						<div class="col-md-3 col-sm-6 padZero">
+							<div class="card card-stat">
+								<div class="media">
+									<div class="media-left meida media-middle media-stat">
+										<span><i class="fas fa-cart-arrow-down"></i></span>
+									</div>
+									<div class="media-body media-text-right">
+										<h1 class="float-right">
+											<span th:text="${nbCmdesECours}"></span>EN COURS
+										</h1>
+									</div>
+								</div>
 							</div>
-						</li>
-						<li class="pr-chart-ctrl">
-							<div class="pr-chart" data-percent="100">
-								
+						</div>
+
+						<div class="col-md-3 col-sm-6 padZero">
+							<div class="card card-stat">
+								<div class="media">
+									<div class="media-left meida media-middle media-stat">
+										<span><i class="fas fa-truck"></i></span>
+									</div>
+									<div class="media-body media-text-right">
+										<h1 class="float-right">
+											<span th:text="${nbCmdesPretALivree}"></span>PRET A LIVREE
+										</h1>
+									</div>
+								</div>
 							</div>
-						</li>
-					</ul>
+						</div>
+
+						<div class="col-md-3 col-sm-6 padZero">
+							<div class="card card-stat">
+								<div class="media">
+									<div class="media-left meida media-middle media-stat">
+										<span><i class="fas fa-shipping-fast"></i></span>
+									</div>
+									<div class="media-body media-text-right">
+										<h1 class="float-right">
+											<span th:text="${nbCmdesLivree}"></span>LIVREE
+										</h1>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
+
 		<div class="row">
-			<div class="col-md-9">
+			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<i class="fas fa-info-circle"></i> Bienvenue mohamed
+						<i class="fas fa-chart-bar"></i> Commande mensuelles
 					</div>
 
 					<!-- *** Debut card body *** -->
-					<div class="card-body ste_info"></div>
+					<div class="card-body ste_info">
+						<canvas id="myChart" width="400" height="150"></canvas>
+					</div>
 					<!-- *** Fin card body *** -->
 				</div>
 			</div>
 
 			<!-- *** Debut card solde *** -->
-			<div class="col-md-3">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="card mot_dir" style="margin-bottom: 10px;">
-							<h5 class="card-header">
-								<i class="fas fa-comment"></i> Mot du directeur
-							</h5>
-							<div class="card-body">
-								<h5 class="card-title"></h5>
-								<p class="card-text">La qualité n'est pas seulement la mise
-									en oeuvre d'un savoir faire technique ou le respect d'une
-									regle, mais la prise en compte du besoin client dans son
-									expérience singulière"</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-12">
-						<div class="card mot_dir">
-							<h5 class="card-header">
-								<i class="fas fa-comments"></i> Contact
-							</h5>
-							<div class="card-body">
-								<h5 class="card-title"></h5>
-
-								<ul>
-									<li style="margin-bottom: 10px;"><i
-										class="fas fa-map-marker-alt"></i> Ben M'sik Casablanca</li>
-									<li style="margin-bottom: 10px;"><i
-										class="fas fa-envelope"></i> contact@kapisoft.ma</li>
-									<li style="margin-bottom: 10px;"><i
-										class="fas fa-phone-square"></i> +212(0)667872526</li>
-								</ul>
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="col-md-3">.</div>
 		</div>
 		<!-- *** Debut home content *** -->
 
@@ -174,9 +178,43 @@
 	src="../static/src/js/jquery.easypiechart.min.js"
 	th:src="@{/src/js/jquery.easypiechart.min.js}"></script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+<!-- *** ChartJs plugin *** -->	
+<script type="text/javascript"
+	src="../static/src/js/chart.js"
+	th:src="@{/src/js/chart.js}"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script type="text/javascript">
+var canvas = document.getElementById('myChart');
+var data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July", "Aout", "Septembre", "Octobre", "Novembre", "December"],
+    datasets: [
+        {
+            label: "Nombre de commandes mensuels",
+            backgroundColor: "rgba(133,174,229,0.2)",
+            borderColor: "rgba(29,73,229,1)",
+            borderWidth: 2,
+            hoverBackgroundColor: "rgba(160,132,255,0.4)", 
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: [65, 59, 30, 81, 56, 55, 40, 14, 24, 58, 53, 46],
+        }
+    ]
+};
+var option = {
+animation: {
+				duration:5000
+}
+
+};
 
 
+var myBarChart = Chart.Bar(canvas, {
+	data:data,
+  options:option
+});
+</script>
 
 
 </html>

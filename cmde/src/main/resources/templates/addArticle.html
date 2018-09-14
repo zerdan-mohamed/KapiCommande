@@ -99,7 +99,6 @@
 									<th scope="col">Tva</th>
 									<th scope="col">Quantité</th>
 									<th scope="col">Remise</th>
-									<th scope="col">Total</th>
 									<th scope="col"></th>
 								</tr>
 							</thead>
@@ -113,7 +112,6 @@
 												th:value="${article.idArticle}" />
 										</select>
 									</td>
-									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -145,7 +143,7 @@
 									
 									<td>
 										<input type="text" class="form-control" id="idCmdeActuel" name="idCmdeActuel" 
-												th:value="${idCmde}" th:text="${idCmde}" />
+												th:value="${idCmde}" style="display:none" />
 									</td>
 									
 									<td>

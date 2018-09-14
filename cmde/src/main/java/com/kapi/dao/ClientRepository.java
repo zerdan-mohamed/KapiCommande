@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.kapi.model.Client;
+import com.kapi.model.Commande;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 	public List<Client> findByNomClient(String n);
@@ -26,7 +27,10 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 	public void deleteByIdClient(Long idClient);
 	
 	@Query ("select c from Client c where c.idClient like :x")
-	public Client findByIdClient(@Param("x") Long idClient);  
+	public Client findByIdClient(@Param("x") Long idClient);
+	
+	@Query ("select c from Client c where c.idClient like :x")
+	public Client searchByIdClient(@Param("x") Long idClient);
 	
 	@Query ("select c from Client c where c.nomClient like :x")
 	public Page<Client> chercherClients(@Param("x")String mc, Pageable pageable);
