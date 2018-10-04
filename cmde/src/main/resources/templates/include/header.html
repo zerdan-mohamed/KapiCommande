@@ -35,13 +35,15 @@
 
                 <!-- *** Debut header user_profil *** -->
                 <div class="a_account" id="a_account">
+                        
                         <img src="src/img/avatar.jpg" alt="">
                         <i class="ion-chevron-down" id='ico-account'></i>
+                        
                 </div>
-                <div class="a_topmenu hide" id="topbar-menu">
-                    <a href=""><i class="ion-person"></i> Mes informations</a>
+                <div class="a_topmenu hide zIndextop" id="topbar-menu">
+                    <a th:href="@{monCompte}"><i class="ion-person"></i> Mes informations</a>
                     <a href=""><i class="ion-ios7-cart"></i> Mon solde</a>
-                    <a href=""><i class="ion-power"></i> Se deconnecter</a>
+                    <a th:href="@{logout}"><i class="ion-power"></i> Se deconnecter</a>
                 </div>
                 <!-- *** Fin header user_profil *** -->
             </div>

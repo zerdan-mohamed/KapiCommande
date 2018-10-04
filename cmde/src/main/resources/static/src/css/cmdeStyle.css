@@ -1,6 +1,16 @@
+/* 
+ *
+ *
+	Application gestion commerciale, CSS style
+ *
+ *
+ */
 
-/* *** Home style *** */
 
+
+/* *****************************
+   ********* Home style ******** 
+***************************** */
 .div_stat {
 	margin-bottom: 15px;
 }
@@ -46,7 +56,6 @@
 	font-size: 14px;
 }
 
-
 .media-label {
 	margin-top : 5px !important;
 	padding: 5px;
@@ -61,8 +70,12 @@
 	text-align: justify;
 }
 
+/* ************************** */
 
-/* NewCommande style */
+
+/* *****************************
+   ***** New Commande style **** 
+***************************** */
 .cmde_font {
 	font-size: 12px;	
 }
@@ -72,17 +85,30 @@
 	height: 30px;
 }
 
+/* ************************** */
 
-/* AddArticle */
 
-#info_client li {
+/* *****************************
+   ***** Add Article style ***** 
+***************************** */
+#info_client span {
 	margin-bottom: 10px;
-	font-weight: bold;
-	font-size: 14px;
+	/* font-weight: bold;
+	font-size: 14px; */
 }
 
+ #infoCmdeSupp {
+ 	display: none;
+ } 
+ 
+ 
+ /* ************************** */
 
-/* *** Mon compte *** */
+
+/* *****************************
+   ***** Mon compte style ****** 
+***************************** */
+
 .Repadding {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -90,6 +116,17 @@
 }
 
 
+/* ************************** */
+
+
+/* *****************************
+   ***** Header style ****** 
+***************************** */
+.zIndextop {
+	z-index: 10;
+}
+
+/* ************************** */
 
 
 

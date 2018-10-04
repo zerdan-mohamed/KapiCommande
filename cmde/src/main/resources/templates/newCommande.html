@@ -50,23 +50,22 @@
 	<div class="a_content">
 
 		<div class="alert alert-secondary" role="alert">
-			SAP systeme <i class="ion-ios7-arrow-forward"> </i> Nouveau commande
+			SAP systeme <i class="ion-ios7-arrow-forward"> </i> Nouveau Commande
 		</div>
 
 		<!-- *** Debut nouveau commande *** -->
 		<div class="card">
 			<div class="card-header">
-				<i class="fas fa-info-circle"></i> Commande N° <span
-					th:text="${numCmdeAc}"></span>
+				<i class="fas fa-info-circle"></i> Créer nouveau Commande
 			</div>
 
 			<!-- *** Debut card body *** -->
 			<div class="card-body cmde_font">
 				<!-- ** Select client ** -->
+				<form th:action="@{/createCmde}" method="post" id="createCommande">
 				<div class="row" id="clientName">
 					<div class="col-md-3">
-						<div
-							th:if="${listClients != null and not #lists.isEmpty(listClients)}">
+						<div th:if="${listClients != null and not #lists.isEmpty(listClients)}">
 							<select class="custom-select" id="selectClient"
 								name="selectClient" style="height: 30px;"
 								th:field="*{listClients}">
@@ -76,210 +75,39 @@
 							</select>
 						</div>
 					</div>
-				</div>
+					
+					<div class="col-md-3" id="statusCmde">
+							<select class="custom-select" id="statusSelect" name="statusSelect" style="height: 30px;">
+								<option selected>Status commande</option>
+								<option value="En attente">En attente</option>
+								<option value="En cours">En cours</option>
+								<option value="Livrée">Livrée</option>
+							</select>
+					</div>
+					
+					<div class="col-md-3">
+						<input type="date" id="dateLiv" name="dateLiv" style="height: auto; line-height: 10px;" class="custom-select custom-select-sm" />
+					</div>
 
-				<!-- *** Debut client information *** -->
-				<div class="row" style="display: none;" id="infoClient">
-					<div class="col-md-12">
-					<form th:action="@{/createCmde}" method="post">
-						<!-- Info Client - 2er ligne -->
-						<div class="row">
-							<div class="col-md-3">
-								<input type="text" style="height: 30px;" class="form-control"
-									id="nomClient" placeholder="Nom client" />
-							</div>
+					
+						<div class="col-md-3" id="infoClient">
+								<button class="btn btn-sm btn-primary"
+									id="createCmde" disabled="disabled">Créer</button>
 
-							<div class="col-md-3 offset-md-6">
-								<input type="text" style="height: 30px;" th:value="${numCmdeAc}"
-									class="form-control" id="numCommande" name="numCmde"
-									placeholder="Numero commande" />
-							</div>
-						</div>
-
-						<!-- Info Client - 3eme ligne -->
-						<div class="row">
-							<div class="col-md-3">
-								<input type="text" style="height: 30px;" class="form-control"
-									id="contactClient" placeholder="Contact client" />
-							</div>
-
-							<div class="col-md-3 offset-md-6">
-								<select class="custom-select" id="statusCommande"
-									style="height: 30px;">
-									<option value="" selected="selected">Status commande</option>
-									<option value="">En attend</option>
-									<option value="">En cours</option>
-									<option value="">En cours de livraison</option>
-									<option value="">Livreé</option>
-									<option value="">Annulée</option>
-								</select>
-							</div>
-						</div>
-
-						<!-- Info Client - 4eme ligne -->
-						<div class="row" style="padding-top: 10px;">
-							<div class="dates form-group row col-md-3"
-								style="margin-left: 1px;">
-								<label class="control-label" style="font-size: 12px;">
-									Date d'enregistrement</label> <input type="date" style="height: 30px;"
-									class="form-control" id="dateSave" name="dateSave"
-									placeholder="Date d'enregistrement" />
-							</div>
-
-							<div class="form-group row col-md-3 offset-md-6">
-								<label class="control-label" style="font-size: 12px;">
-									Date de livraison</label> <input type="date" style="height: 30px;"
-									class="form-control" id="dateLivraison" name="dateLivraison"
-									placeholder="Date de livraison" />
-							</div>
-						</div>
-
-						<button style="float: right;" class="btn btn-sm btn-primary"
-							id="createCmde">Créer</button>
-						<div class="col-md-3">
 							<input type="text" style="height: 30px;" class="form-control"
-								id="idClient" name="idClient" />
+								id="idClient" name="idClient" hidden="" />
+							
+							<input type="text" style="height: 30px;" class="form-control"
+								id="statusCmmde" name="statusCmmde" hidden="" />
 						</div>
-					</form>
-					</div>
-				</div>
-				<!-- *** Fin client information  *** -->
-
-				<br>
-
-				<!-- *** Debut table commande *** -->
-				<div class="row" style="display: none;" id="addArticle">
-					<div class="col-md-12">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th scope="col">Designation</th>
-									<th scope="col">Prix TTC</th>
-									<th scope="col">Quantité</th>
-									<th scope="col">Remise</th>
-									<th scope="col">TVA</th>
-									<th scope="col">Total</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:field="*{listArticles}">
-									<td><select class="custom-select" id="selectArticle"
-										name="selectArtice" style="height: 30px;">
-											<option value="">Selectionner un article</option>
-											
-											<option th:each="article : ${listArticles}" id="selectArt"
-												th:value="${article.prixHT}"
-												th:text="${article.libelleArticle}"
-												th:with="priceArt=${article.prixHT}"
-												th:attr="att = ${article.prixHT}" />
-												
-									</select></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-
-								</tr>
-
-								<tr id="artSelected" style="display: none;">
-									<td><input type="text" style="height: 30px;"
-										class="form-control" id="libelArticle" name="libelArticle" />
-									</td>
-
-									<td><input type="text" style="height: 30px;"
-										class="form-control" id="prix" name="prix" /></td>
-
-									<td><input type="text" style="height: 30px;"
-										class="form-control" id="quantite" name="quantite" /></td>
-
-									<td><select class="custom-select" id="remise"
-										name="remise" style="height: 30px;">
-											<option value="5%">---</option>
-											<option value="5%">5%</option>
-											<option value="10%">10%</option>
-											<option value="15%">15%</option>
-											<option value="20%">20%</option>
-									</select></td>
-
-									<td><input type="text" style="height: 30px;"
-										class="form-control" id="tva" name="tva" disabled="disabled" /></td>
-									<td><input type="text" style="height: 30px;"
-										class="form-control" id="totalArt" name="totalArt" value="Dhs" /></td>
-									<td><span class="btn btn-success btn-sm"> <i
-											class="fas fa-plus-circle"></i>
-									</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- *** Fin table commande *** -->
-
-				<br>
-
-				<!-- *** Debut facture total *** -->
-				<div class="row" style="display: none;">
-					<div class="col-md-12">
-						<!-- total facture - 1er ligne -->
-						<div class="row">
-							<div class="col-md-3">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Commercial : Mohamed zerdan"
-									disabled="disabled" />
-							</div>
-
-							<div class="col-md-3 offset-md-6">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="totalAR" placeholder=""
-									value="Total avant remise : 2500000 dhs" disabled />
-							</div>
-						</div>
-
-						<!-- total facture - 2er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="remise" placeholder="Remise" />
-							</div>
-						</div>
-
-						<!-- total facture - 3er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Fret" />
-							</div>
-						</div>
-
-						<!-- total facture - 4er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Arrondi" />
-							</div>
-						</div>
-
-						<!-- total facture - 5er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="TVA" />
-							</div>
-						</div>
-
-						<!-- total facture - 6er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Total" />
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- *** Fin facture total *** -->
+					
+				</div> <!-- ** Fin select client ** -->
+				
+				
+				</form>
+				
+				<!-- <div class="alert alert-info" th:if="${articleSuccess}"> </div> -->
+				
 			</div>
 			<!-- *** Fin card body *** -->
 		</div>
@@ -290,6 +118,7 @@
 	<!-- *** Debut dashboard footer *** -->
 	<div lang="en" th:include="include/footer"></div>
 	<!-- *** Fin dashboard footer *** -->
+	</div>
 </body>
 
 <!-- *** JQuery bibliotheque *** -->

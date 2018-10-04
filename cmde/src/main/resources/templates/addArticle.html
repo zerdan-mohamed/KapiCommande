@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name='viewport'
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>Login page</title>
+<title>Add ligne commande</title>
 
 <link rel="stylesheet" type="text/css"
 	href="../static/src/css/bootstrap.css"
@@ -68,16 +68,30 @@
 						<form th:action="@{/createCmde}" method="post">
 							<!-- Info Client - 2er ligne -->
 							<div class="row">
-								<div class="col-md-3">
-									<ul id="info_client">
-										<li id="numCmde" th:value="${numCmdeAc}"
-											th:text="'Num Commande : ' + ${numCmdeAc}"></li>
-										<li id="nomClient" th:value="${client.nomClient}"
-											th:text="'Nom Client : ' + ${client.nomClient} + ' ' + ${client.prenomClient}"></li>
-										<li id="telClient" th:value="${client.telClient}"
-											th:text="'Telephone Client : ' + ${client.telClient}"></li>
-									</ul>
-									<hr>
+								<!-- ** Information commande ** -->
+								<div class="col-md-4" style="padding: 0;">
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label"> N° commande : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" disabled="disabled" 
+												id="numCmde" th:value="${numCmdeAc}" />
+										</div>
+									</div>
+									
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label"> Tel client : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" disabled="disabled" 
+												id="telClient" th:value="${client.telClient}"/>
+										</div>
+									</div>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label"> Nom client : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" disabled="disabled" 
+												id="nomClient" th:value="${client.nomClient}"/>  <!-- th:text="${client.nomClient} + ' ' + ${client.prenomClient}" -->
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -85,148 +99,191 @@
 				</div>
 				<!-- *** Fin client information  *** -->
 
-				<br>
+				<br> <br>
 
 				<!-- *** Debut table commande *** -->
 				<form th:action="@{/saveLCmde}" method="post" id="lCmdeForm">
-				<div class="row" id="addArticle">
-					<div class="col-md-12">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th scope="col">Designation</th>
-									<th scope="col">Prix TTC</th>
-									<th scope="col">Tva</th>
-									<th scope="col">Quantité</th>
-									<th scope="col">Remise</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:field="*{listArticles}">
-									<td>
-										<select class="custom-select" id="selectArticle" name="selectArtice" style="height: 30px; width: 200px;">
-											<option value="">Selectionner un article</option>
-											<option th:each="article : ${listArticles}" id="selectArt"
-												th:text="${article.libelleArticle}"
-												th:value="${article.idArticle}" />
-										</select>
-									</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
+					<div class="row" id="addArticle">
+						<div class="col-md-12 table-responsive-sm">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">Designation</th>
+										<th scope="col">Prix HT</th>
+										<th scope="col">Tva</th>
+										<th scope="col">Quantité</th>
+										<th scope="col">Remise</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:field="*{listArticles}">
+										<td><select class="custom-select" id="selectArticle"
+											name="selectArtice" style="height: 30px; width: 200px;">
+												<option value="">Selectionner un article</option>
+												<option th:each="article : ${listArticles}" id="selectArt"
+													th:text="${article.libelleArticle}"
+													th:value="${article.idArticle}" />
+										</select></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
 
-								<tr id="artSelected"> <!--   style="display: none;" -->
-									<td>
-										<input type="text" style="height: 30px;" class="form-control" id="libelArticle" name="libelArticle" />
-									</td>
-									
-									<td>
-										<input type="text" style="height: 30px;" class="form-control" id="prix" name="prix" />
-									</td>
-										
-									<td>
-										<input type="text" style="height: 30px;" class="form-control" id="tva" name="tva"/>
-									</td>
+									<tr id="artSelected">
+										<!--   style="display: none;" -->
+										<td><input type="text" style="height: 30px;"
+											class="form-control" id="libelArticle" name="libelArticle" />
+										</td>
 
-									<td>
-										<input type="text" style="height: 30px;" class="form-control" id="quantite" name="quantite" />
-									</td>
+										<td><input type="text" style="height: 30px;"
+											class="form-control" id="prix" name="prix" /></td>
 
-									<td>
-										<input type="text" style="height: 30px;" class="form-control" id="remise" name="remise" />
-									</td>
-									
-									<td>
-										<input type="text" class="form-control" id="idCmdeActuel" name="idCmdeActuel" 
-												th:value="${idCmde}" style="display:none" />
-									</td>
-									
-									<td>
-										<button type="submit" class="btn btn-success btn-sm">
-											<i class="fas fa-plus-circle"></i>
-										</button>
-									</td>
-									
-									<!-- <span class="btn btn-success btn-sm"> <i class="fas fa-plus-circle"></i> </span> -->
-									
-									<td><input type="text" style="display:none"
-										class="form-control" id="idA" name="idA" />
-									</td>
-								</tr>
-							</tbody>
-						</table>
+										<td><input type="text" style="height: 30px;"
+											class="form-control" id="tva" name="tva" /></td>
+
+										<td><input type="text" style="height: 30px;"
+											class="form-control" id="quantite" name="quantite" /></td>
+
+										<td><input type="text" style="height: 30px;"
+											class="form-control" id="remise" name="remise" /></td>
+
+										<td><input type="text" class="form-control"
+											id="idCmdeActuel" name="idCmdeActuel" th:value="${idCmde}"
+											style="display: none" /></td>
+
+										<td>
+											<button type="submit" class="btn btn-success btn-sm">
+												<i class="fas fa-plus-circle"></i>
+											</button>
+										</td>
+
+										<!-- <span class="btn btn-success btn-sm"> <i class="fas fa-plus-circle"></i> </span> -->
+
+										<td><input type="text" style="display: none"
+											class="form-control" id="idA" name="idA" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
 				</form>
 				<!-- *** Fin table commande *** -->
 
 				<br>
 
+				<div class="table-responsive-sm">
+					<table class="table" id="GLtable">
+						<thead class="thead font-weight-bold" style="background-color: #09AFDF; color: white;">
+							<tr>
+								<th scope="col">Designation</th>
+								<th scope="col">Prix HT(Dhs)</th>
+								<th scope="col">Tva</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Remise</th>
+								<th scope="col">Total TTC(Dhs)</th>
+							</tr>
+						</thead>
+						<tbody class="text-primary">
+
+						</tbody>
+					</table>
+				</div>
+
+				<hr>
+
+
+
 				<!-- *** Debut facture total *** -->
-				<div class="row" style="display: none;">
+				<div id="infoCmdeSupp" class="row">
 					<div class="col-md-12">
 						<!-- total facture - 1er ligne -->
 						<div class="row">
-							<div class="col-md-3">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Commercial : Mohamed zerdan"
-									disabled="disabled" />
+							<div class="col-md-4">
+								<form>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">Vendeur : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control font-weight-bold" id="firstName" th:value="${session.userCompte.username}" disabled="disabled">
+										</div>
+									</div>
+								</form>
 							</div>
 
-							<div class="col-md-3 offset-md-6">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="totalAR" placeholder=""
-									value="Total avant remise : 2500000 dhs" disabled />
+							<div class="col-md-4 offset-md-4">
+								<form>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">Total HT : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control font-weight-bold" id="totalHT" value="0" disabled="disabled">
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 
 						<!-- total facture - 2er ligne -->
 						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="remise" placeholder="Remise" />
-							</div>
-						</div>
-
-						<!-- total facture - 3er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Fret" />
-							</div>
-						</div>
-
-						<!-- total facture - 4er ligne -->
-						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Arrondi" />
+							<div class="col-md-4 offset-md-8">
+								<form>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">Total remise : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control font-weight-bold" id="totalRm" value="0" disabled="disabled">
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 
 						<!-- total facture - 5er ligne -->
 						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="TVA" />
+							<div class="col-md-4 offset-md-8">
+								<form>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalTVA" class="col-sm-4 col-form-label">Total TVA : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control font-weight-bold" id="totalTVA" value="0" disabled="disabled">
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 
 						<!-- total facture - 6er ligne -->
 						<div class="row">
-							<div class="col-md-3 offset-md-9">
-								<input type="text" style="height: 24px;" class="form-control"
-									id="firstName" placeholder="Total" />
+							<div class="col-md-4 offset-md-8">
+								<form>
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalTTC" class="col-sm-4 col-form-label">Total TTC : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control font-weight-bold" id="totalTTC" value="0" disabled="disabled">
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- *** Fin facture total *** -->
+
+				<br> <a th:href="@{listeCommande}">
+					<button class="btn btn-primary btn-sm btn-dark.focus"
+						id="validCmde" type="button" disabled="disabled"
+						style="float: right;">
+						<i class="fas fa-check"></i> Confirmer
+					</button>
+				</a> <a th:href="@{listeCommande}">
+					<button class="btn btn-primary btn-sm btn-dark.focus"
+						id="imprimerCmde" type="button" disabled="disabled"
+						style="float: right; margin-right: 5px;">
+						<i class="fas fa-print"></i> Imprimer
+					</button>
+				</a>
+
 			</div>
 			<!-- *** Fin card body *** -->
 		</div>
@@ -262,9 +319,9 @@
 <!-- *** internal js file *** -->
 <script type="text/javascript" src="../static/src/js/modal.js"
 	th:src="@{/src/js/modal.js}"></script>
-	
+
 <!-- *** Ajax POST ligne commande *** -->
 <script type="text/javascript" src="../static/src/js/articleAjax.js"
-	th:src="@{/src/js/articleAjax.js}"></script>	
+	th:src="@{/src/js/articleAjax.js}"></script>
 
 </html>

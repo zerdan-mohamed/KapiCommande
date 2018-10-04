@@ -35,14 +35,9 @@ public class LCommandeController {
 	
 	@Autowired
 	private CommandeRepository commandeRepository;
+	
+	List<LigneCommande> lCommandes = new ArrayList<LigneCommande>();
 
-	/*
-	@GetMapping(value = "/all")
-	public Response getResource() {
-		Response response = new Response("Article", articles);
-		return response;
-	}
-	*/
 	
 	// ** Select article information **
 	@RequestMapping(value="/selectArticle", method=RequestMethod.POST)
@@ -58,7 +53,6 @@ public class LCommandeController {
 		
 		model.addAttribute("articleSuccess", "true");
 		model.addAttribute("articleActuel", articleActuel);
-		//model.addAttribute("libelle", libelle);
 		
 		Response response = new Response("Article", articleActuel);
 		return response;
@@ -68,7 +62,7 @@ public class LCommandeController {
 	// ** Save ligne commande **
 	@RequestMapping(value="/saveLCmde", method=RequestMethod.POST)
 	@ResponseBody
-	public Response saveLigneCommande(@RequestBody Map<String, String> json) {
+	public Response saveLigneCommande(@RequestBody Map<String, String> json, Model model) {
 		
 		long quantite = Long.parseLong(json.get("quantite"));
 		long idA = Long.parseLong(json.get("idArticle"));
@@ -86,9 +80,15 @@ public class LCommandeController {
 		lCmde.setCommande(commande);
 		lCommandeRepository.save(lCmde);
 		
-		Response response = new Response("Done", lCmde);
+		lCommandes.add(lCmde);
+		
+		long nombre = lCmde.getQuantite();
+		model.addAttribute("nombre", nombre);
+		
+		Response response = new Response("Commande", lCmde);
 		return response;
 	}
+	
 	
 	
 }

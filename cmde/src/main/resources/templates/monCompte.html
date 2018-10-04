@@ -46,14 +46,10 @@
 
 	<!-- *** Debut dashboard content *** -->
 	<div class="a_content">
-
-		<!-- <div class="alert alert-secondary" role="alert">
-                SAP systeme  <i class="ion-ios7-arrow-forward"> Bienvenue</i>
-            </div> -->
-
 		<!-- *** Debut home content *** -->
 		<div class="container-fluid div_stat">
-			<!-- statistic general -->
+
+			<!-- *** statistic general *** -->
 			<div class="row home_stat">
 				<div class="col-md-12">
 					<div class="row">
@@ -120,6 +116,7 @@
 				</div>
 			</div>
 
+			<!-- *** Mon compte information *** -->
 			<div class="row">
 				<div class="col-md-12 Repadding">
 					<div class="card">
@@ -129,68 +126,64 @@
 
 						<!-- *** Debut card body *** -->
 						<div class="card-body ste_info">
-							<!-- *** Debut info client *** -->
 							<div class="row">
+								<div class="col-md-9">
+									<div class="alert alert-info" role="alert">
+										Listes des dernier 8 commandes :
+									</div>
+
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th scope="col">Num commande</th>
+												<th scope="col">Date enregistrement</th>
+												<th scope="col">Date Livraison</th>
+												<th scope="col">Status commande</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="c:${listCommandes}">
+												<th th:text="${c.numCmde}" scope="row"></th>
+												<td th:text="${c.enregistreDate}"></td>
+												<td th:text="${c.livraisonDate}"></td>
+												<td th:text="${c.statusCmde}"></td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
 								<!-- picture client -->
 								<div class="col-md-3">
 									<img src="src/img/avatar.jpg"
-										style="height: 240px; width: 240px;" alt="..."
+										style="height: 270px; width: 270px;" alt="..."
 										class="img-thumbnail">
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item">NOM : <span th:text="${session.userCompte.username}"></span> </li>
+										<li class="list-group-item">PRENOM :</li>
+										<li class="list-group-item">VILLE :</li>
+										<li class="list-group-item">TELEPHONE :</li>
+										<li class="list-group-item">EMAIL :</li>
+									</ul>
 								</div>
-								<div class="col-md-9">
-
-									<form>
-										<div class="form-group">
-											<label for="nomClient">Nom :</label> <input type="text"
-												class="form-control" 
-												placeholder="Enter nom client" />
-										</div>
-
-										<div class="form-group">
-											<label for="prenomClient">Prenom :</label> <input type="text"
-												class="form-control" placeholder="Enter prenom client" />
-										</div>
-
-										<div class="form-group">
-											<label for="villeClient">Ville :</label> <input type="text"
-												class="form-control" aria-describedby="villeClient"
-												placeholder="Enter ville client" />
-										</div>
-
-										<div class="form-group">
-											<label for="telClient">Telephone :</label> <input type="text"
-												class="form-control" placeholder="Enter telephone client" />
-										</div>
-
-										<div class="form-group">
-											<label for="emailClient">Email :</label> <input type="email"
-												class="form-control" placeholder="Enter email client" />
-										</div>
-
-										<button type="submit" style="float: right"
-											class="btn btn-success">
-											<i class="far fa-edit"></i> Modifier
-										</button>
-
-									</form>
-
-								</div>
-
 							</div>
-
 						</div>
 						<!-- *** Fin card body *** -->
+
 					</div>
 				</div>
 
 			</div>
-			<!-- *** Debut home content *** -->
-		</div>
-		<!-- *** Fin dashboard content *** -->
 
-		<!-- *** Debut dashboard footer *** -->
-		<div lang="en" th:include="include/footer"></div>
-		<!-- *** Fin dashboard footer *** -->
+
+		</div>
+		<!-- *** Fin home content *** -->
+	</div>
+	<!-- *** Fin dashboard content *** -->
+
+	<!-- *** Debut dashboard footer *** -->
+	<div lang="en" th:include="include/footer"></div>
+	<!-- *** Fin dashboard footer *** -->
 </body>
 
 <!-- *** JQuery bibliotheque *** -->

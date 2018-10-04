@@ -2,9 +2,12 @@ package com.kapi.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User implements Serializable {
@@ -12,7 +15,12 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long userid;
+	
+	@NotEmpty
+	@Column(unique=true)
 	private String username;
+	
+	@Size(min=4)
 	private String password;
 	
 	public User() {

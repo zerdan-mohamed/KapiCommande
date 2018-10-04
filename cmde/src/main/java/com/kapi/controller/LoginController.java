@@ -2,6 +2,8 @@ package com.kapi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kapi.dao.ClientRepository;
 import com.kapi.dao.CommandeRepository;
+import com.kapi.dao.UserRepository;
 import com.kapi.model.Client;
 import com.kapi.model.Commande;
 import com.kapi.model.User;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private ClientRepository clientRepository;
@@ -33,12 +39,14 @@ public class LoginController {
 	
 	//checking for login credentials
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute(name="loginForm") User user, Model model) {
+	public String login(@ModelAttribute(name="loginForm") User user, Model model, HttpSession session) {
 		
 		String username = user.getUsername();
 		String password = user.getPassword();
 		
-		if("admin".equals(username) && "admin".equals(password)) {
+		User userCompte = userRepository.findByUsernameAndPassword(username, password);
+		
+		if(userCompte != null) {
 			//if username and password is correct, we are returning home page
 			
 			List<Client> listClients = clientRepository.findAll();
@@ -56,14 +64,23 @@ public class LoginController {
 			model.addAttribute("nbCmdesLivree", nbCmdesLivree);
 			model.addAttribute("nbCmdesPretALivree", nbCmdesPretALivree);
 			
+			session.setAttribute("userCompte", userCompte);
+			
 			return "home";
-		}
-		
-		//if username and password is wrong
-		model.addAttribute("invalidLogin", true);
-		//returning again login page 
+		} else {
+			//returning again login page
+			model.addAttribute("invalidLogin", true);
+			return "index";
+		}	
+	}
+	
+	
+	// *** se deconnecter ***
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout() {
 		return "index";
 	}
+	
 	
 	
 	

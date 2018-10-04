@@ -3,10 +3,13 @@ package com.kapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kapi.dao.ClientRepository;
 import com.kapi.dao.CommandeRepository;
@@ -47,12 +50,13 @@ public class CompteController {
 	
 	// *** Mon compte page ***
 	@RequestMapping(value="/monCompte", method=RequestMethod.GET)
-	public String monCompte(Model model) {
+	public String monCompte(Model model, @RequestParam(name="page", defaultValue="0")int p) {
 		
 		List<Client> listClients = clientRepository.findAll();
 		List<Commande> listCmdeCours = commandeRepository.commandesEnCours();
 		List<Commande> listCmdeLivree = commandeRepository.commandesLivree();
 		List<Commande> listCmdePretALivree = commandeRepository.commandesPretALivree();
+		Page<Commande> listCommandes = commandeRepository.listCommandes(PageRequest.of(p, 8));
 		
 		int nbClients = listClients.size();
 		int nbCmdesECours = listCmdeCours.size();
@@ -63,6 +67,7 @@ public class CompteController {
 		model.addAttribute("nbCmdesECours", nbCmdesECours);
 		model.addAttribute("nbCmdesLivree", nbCmdesLivree);
 		model.addAttribute("nbCmdesPretALivree", nbCmdesPretALivree);
+		model.addAttribute("listCommandes", listCommandes);
 		
 		return "monCompte";
 	}

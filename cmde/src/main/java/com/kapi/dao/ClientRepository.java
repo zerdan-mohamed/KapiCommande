@@ -17,6 +17,7 @@ import com.kapi.model.Client;
 import com.kapi.model.Commande;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
+	
 	public List<Client> findByNomClient(String n);
 	public Page<Client> findByNomClient(String n, Pageable pageable);
 	public List<Client> findAll();

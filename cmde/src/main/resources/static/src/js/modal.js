@@ -10,14 +10,28 @@ $(document).ready(function() {
 	});
 	
 	
+	// *** Delete commande confirmation modal ***
+	$('table .delCmdeBtn').on('click', function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('#delCmdeModal #delCmdeRef').attr('href', href);
+		$('#delCmdeModal').modal();
+	});
+	
+	
 	// *** select client ***	
 	$("#selectClient").change(function() {  
 		$("#infoClient #createCmde").prop('disabled', false);
 		
 		var idClient = $("#selectClient").val();
 	    $("#idClient").val(idClient);
-	  });
+	});
 
+	// *** select status ***	
+	$("#statusSelect").change(function() {  
+		var statusCmmde = $("#statusSelect").val();
+	    $("#statusCmmde").val(statusCmmde);
+	});
 	
 	
 	

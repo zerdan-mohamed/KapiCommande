@@ -2,12 +2,14 @@ package com.kapi.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kapi.dao.ArticleRepository;
 import com.kapi.dao.ClientRepository;
@@ -45,19 +48,23 @@ public class CommandeController {
 		List<Client> listClients = clientRepository.findAll();
 		
 		model.addAttribute("listClients", listClients);
-		return "newCommande2";
+		return "newCommande";
 	}
 
 	
 	// *** Create new commande ***
-	  @RequestMapping(value="/createCmde", method=RequestMethod.POST)
-	  public String createCmde(HttpServletRequest request, Model model,
-	            @ModelAttribute("idClient") Long idClient) {
+	@RequestMapping(value="/createCmde", method=RequestMethod.POST)
+	public String createCmde(HttpServletRequest request, Model model,
+            @ModelAttribute("idClient") Long idClient,
+            @ModelAttribute("statusCmmde") String statusCmmde,
+            @RequestParam("dateLiv") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateLiv) {
 	    
-	    Client client = clientRepository.findByIdClient(idClient);
+		Client client = clientRepository.findByIdClient(idClient);
 	    
 	    List<Commande> listCommandes = commandeRepository.findAll();
 	    List<Article> listArticles = articleRepository.findAll();
+	    
+	    System.out.println(dateLiv);
 	    
 	    int sizeList = listCommandes.size();
 	    int numCmdeAc;
@@ -75,6 +82,8 @@ public class CommandeController {
 	    commande.setNumCmde(numCmdeAc);
 	    commande.setClient(client);
 	    commande.setEnregistreDate(new Date());
+	    commande.setStatusCmde(statusCmmde);
+	    commande.setLivraisonDate(dateLiv);
 	    commandeRepository.save(commande);
 	    
 	    long idCmde = commande.getIdCmde();
@@ -86,10 +95,9 @@ public class CommandeController {
 	    model.addAttribute("idCmde", idCmde);
 
 	    return "addArticle";
-	  }
+	}	
 
-
-	// *** Create new commande *** 
+	// *** list commandes *** 
 	@RequestMapping(value="/listeCommande", method=RequestMethod.GET)
 	public String listeCommande(Model model,
 			@RequestParam(name="page", defaultValue="0")int p,
@@ -109,5 +117,36 @@ public class CommandeController {
 				
 		return "listeCommande";
 	}
+	
+	
+	// *** Delete client ***
+	@RequestMapping(value="/delCommande", method=RequestMethod.GET)
+	public String delCommande(@RequestParam(name="idCmde")long idCmde) {
+		
+		commandeRepository.deleteById(idCmde);
+		return "redirect:listeCommande";
+	}
+	
+	// *** Find one client
+	@RequestMapping(value="/findCommande", method=RequestMethod.GET)
+	public String findCommande(Model model, @RequestParam(name="idCmde")Long idCmde) {
+		//Client client = clientRepository.findById(idCmde).get();
+		Commande commandeView = commandeRepository.findByIdCmde(idCmde);
+		
+		model.addAttribute("commandeView", commandeView);
+		return "viewCommande";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

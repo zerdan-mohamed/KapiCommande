@@ -21,6 +21,11 @@ public interface CommandeRepository extends JpaRepository<Commande, Long> {
 	@Query ("select c from Commande c where c.idCmde like :y")
 	public Commande findByIdCmde(@Param("y") long idCmde);
 	
+	// SELECT c.currency FROM Country c ORDER BY currency
+	
+	@Query ("select c from Commande c order by enregistreDate desc")
+	public Page<Commande> listCommandes(Pageable pageable);
+	
 	// Pret à  livrée
 	
 	/* *** Commandes statistiques *** */

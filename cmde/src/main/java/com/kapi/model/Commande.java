@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,11 +21,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Commande implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public long idCmde;
 	
 	@NotNull
+	//@Column(name="num_cmde", columnDefinition="int default '100'")
 	public int numCmde;
 	
 	public String statusCmde;
@@ -34,7 +42,7 @@ public class Commande implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date livraisonDate;
 	
-	@OneToMany(mappedBy="commande", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="commande", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<LigneCommande> ligneCmde;
 	
 	@ManyToOne
