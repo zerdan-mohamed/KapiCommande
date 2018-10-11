@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 	
 	// *** Delete client confirmation modal ***
@@ -18,8 +17,15 @@ $(document).ready(function() {
 		$('#delCmdeModal').modal();
 	});
 	
+	// *** Delete ligne commande confirmation modal ***
+	$('table .delLCmdeBtn').on('click', function(event){
+		event.preventDefault();
+		var href = $(this).attr('href');
+		$('#delLCmdeModal #delLCmdeRef').attr('href', href);
+		$('#delLCmdeModal').modal();
+	});
 	
-	// *** select client ***	
+	// *** select client commande ***	
 	$("#selectClient").change(function() {  
 		$("#infoClient #createCmde").prop('disabled', false);
 		
@@ -27,12 +33,11 @@ $(document).ready(function() {
 	    $("#idClient").val(idClient);
 	});
 
-	// *** select status ***	
+	// *** select status commande ***	
 	$("#statusSelect").change(function() {  
 		var statusCmmde = $("#statusSelect").val();
 	    $("#statusCmmde").val(statusCmmde);
 	});
-	
 	
 	
 	/*

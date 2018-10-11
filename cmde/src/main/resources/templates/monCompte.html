@@ -127,37 +127,10 @@
 						<!-- *** Debut card body *** -->
 						<div class="card-body ste_info">
 							<div class="row">
-								<div class="col-md-9">
-									<div class="alert alert-info" role="alert">
-										Listes des dernier 8 commandes :
-									</div>
-
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th scope="col">Num commande</th>
-												<th scope="col">Date enregistrement</th>
-												<th scope="col">Date Livraison</th>
-												<th scope="col">Status commande</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="c:${listCommandes}">
-												<th th:text="${c.numCmde}" scope="row"></th>
-												<td th:text="${c.enregistreDate}"></td>
-												<td th:text="${c.livraisonDate}"></td>
-												<td th:text="${c.statusCmde}"></td>
-
-											</tr>
-										</tbody>
-									</table>
-								</div>
-
 								<!-- picture client -->
 								<div class="col-md-3">
-									<img src="src/img/avatar.jpg"
-										style="height: 270px; width: 270px;" alt="..."
-										class="img-thumbnail">
+									<img src="src/img/avatar.jpg" class="img-thumbnail"
+										style="height: 270px; width: 270px;" alt="..." >
 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">NOM : <span th:text="${session.userCompte.username}"></span> </li>
 										<li class="list-group-item">PRENOM :</li>
@@ -166,15 +139,63 @@
 										<li class="list-group-item">EMAIL :</li>
 									</ul>
 								</div>
+								
+								<div class="col-md-9 table-responsive-sm">
+									<div class="alert alert-info" role="alert">
+										Listes des dernier 8 commandes :
+									</div>
+
+									<table class="table  table-striped">
+										<thead style="background-color: #09AFDF; color: white;">
+											<tr>
+												<th scope="col">Num commande</th>
+												<th scope="col">Date enregistrement</th>
+												<th scope="col">Date Livraison</th>
+												<th scope="col">Status commande</th>
+												<th scope="col">Total TTC</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr th:each="c:${listCommandes}" > <!-- th:unless="${c.index > 7}" -->
+												<th th:text="${c.numCmde}" scope="row"></th>
+												<td th:text="${c.enregistreDate}"></td>
+												<td th:text="${c.livraisonDate}"></td>
+												<td th:text="${c.statusCmde}"></td>
+												<th class="font-weight-bold font-italic text-secondary"> <span th:text="${listTTC[2]}"></span> Dhs</th>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 						<!-- *** Fin card body *** -->
+						
+						<script type="text/javascript" th:inline="javascript">
+							/* var TTC = [[${listTTC}]]; */
+							
+							/* $.each(TTC, function( key, value ) {
+								alert( key + ": " + value ); 
+							}); 
+							 */
 
+							/* 
+							for(var i = 0; i<tab_checkbox.length; i++) {
+							 	id = "checkbox" + tab_checkbox[i] + "botanique";
+								$("input[name='"+id+"[1]']").change( function() {
+									if($(this).is(':checked')) {
+								    	$("div[id='"+id+"']").show();
+									} 
+								});
+							}
+							*/		 
+							
+							/* document.getElementById("totalTTCL").value = TTC[1]; */
+						</script>
+						
 					</div>
 				</div>
-
 			</div>
-
 
 		</div>
 		<!-- *** Fin home content *** -->

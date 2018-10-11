@@ -29,9 +29,10 @@
 	href="../static/src/css/fontawesome.css"
 	th:href="@{/src/css/fontawesome.css}" />
 
-
 <link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
 	th:href="@{/src/css/all.css}" />
+	
+	<link rel="stylesheet" type="text/css" href="../static/src/css/cmdeStyle.css" th:href="@{/src/css/cmdeStyle.css}" />
 
 </head>
 <body>
@@ -54,9 +55,11 @@
 		<!-- *** Debut nouveau commande *** -->
 		<div class="card">
 			<div class="card-header">
-				<i class="fas fa-info-circle"></i> Liste des commandes <a
-					class="btn-sm btn-success" style="float: right"
-					th:href="@{newCommande}"><i class="fas fa-plus-circle"></i></a>
+				<i class="fas fa-info-circle"></i> Liste des commandes 
+				
+				<a class="btn-sm btn-success" style="float: right" th:href="@{newCommande}">
+					<i class="fas fa-plus-circle"></i>
+				</a>
 			</div>
 
 			<!-- *** Debut card body *** -->
@@ -77,9 +80,9 @@
 
 				<!-- *** Debut table client *** -->
 				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-striped">
-							<thead>
+					<div class="col-md-12 table-responsive-sm">
+						<table class="table table-striped" id="GLtable">
+							<thead class="thead font-weight-bold" style="background-color: #09AFDF; color: white;">
 								<tr>
 									<th scope="col">Num commande</th>
 									<th scope="col">Date enregistrement</th>
@@ -88,7 +91,7 @@
 									<th scope="col"></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody class="text-danger" style="font-size: 14px;">
 								<tr th:each="c:${pageCommandes.content}">
 									<th th:text="${c.numCmde}" scope="row"></th>
 									<td th:text="${c.enregistreDate}"></td>
@@ -118,18 +121,17 @@
 						<br>
 					</div>
 
-
-					<!-- pagination liste client -->
+					<!-- ** Pagination liste client ** -->
 					<div style="justify-content: right;">
 						<nav aria-label="Page navigation example"
 							class="navbar navbar-toggleable-md navbar-light bg-faded">
 							<ul class="pagination nav nav-pills">
 								<li class="nav-item"
-									th:classappend="${p}==${pageCourante}? 'active':''"
-									th:each="p:${pages}"><a class="page-link"
-									th:classappend="${p}==${pageCourante}? 'active':''"
-									th:text="${p}"
-									th:href="@{listeCommande(page=${p},motCle=${motCle})}"></a></li>
+									th:classappend="${p}==${pageCourante}? 'active':''" th:each="p:${page}">
+										<a class="page-link" th:classappend="${p}==${pageCourante}? 'active':''" th:text="${p}"
+											th:href="@{listeCommande(page=${p},motCle=${motCle})}">
+										</a>
+								</li>
 							</ul>
 						</nav>
 					</div>

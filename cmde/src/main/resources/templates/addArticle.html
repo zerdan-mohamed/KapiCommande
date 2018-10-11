@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name='viewport'
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>Add ligne commande</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	
+	<title>Add ligne commande</title>
 
-<link rel="stylesheet" type="text/css"
-	href="../static/src/css/bootstrap.css"
-	th:href="@{/src/css/bootstrap.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap.css" th:href="@{/src/css/bootstrap.css}" />
 
-<link rel="stylesheet" type="text/css"
-	href="../static/src/css/bootstrap-datepicker.css"
-	th:href="@{src/css/bootstrap-datepicker.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap-datepicker.css" th:href="@{src/css/bootstrap-datepicker.css}" />
 
-<link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
-	th:href="@{/src/css/app.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/css/app.css" th:href="@{/src/css/app.css}" />
 
-<link rel="stylesheet" type="text/css"
-	href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
-	th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css" th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}" />
 
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-	rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
 
-<link rel="stylesheet" type="text/css"
-	href="../static/src/css/fontawesome.css"
-	th:href="@{/src/css/fontawesome.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/css/fontawesome.css" th:href="@{/src/css/fontawesome.css}" />
 
-<link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
+	<link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
 	th:href="@{/src/css/all.css}" />
 
-<link rel="stylesheet" type="text/css"
-	href="../static/src/css/cmdeStyle.css"
-	th:href="@{/src/css/cmdeStyle.css}" />
+	<link rel="stylesheet" type="text/css" href="../static/src/css/cmdeStyle.css" th:href="@{/src/css/cmdeStyle.css}" />
 
 </head>
 <body>
@@ -136,14 +123,14 @@
 									<tr id="artSelected">
 										<!--   style="display: none;" -->
 										<td><input type="text" style="height: 30px;"
-											class="form-control" id="libelArticle" name="libelArticle" />
+											class="form-control" id="libelArticle" name="libelArticle" disabled="disabled" />
 										</td>
 
 										<td><input type="text" style="height: 30px;"
-											class="form-control" id="prix" name="prix" /></td>
+											class="form-control" id="prix" name="prix" disabled="disabled" /></td>
 
 										<td><input type="text" style="height: 30px;"
-											class="form-control" id="tva" name="tva" /></td>
+											class="form-control" id="tva" name="tva" disabled="disabled" /></td>
 
 										<td><input type="text" style="height: 30px;"
 											class="form-control" id="quantite" name="quantite" /></td>
@@ -180,14 +167,14 @@
 						<thead class="thead font-weight-bold" style="background-color: #09AFDF; color: white;">
 							<tr>
 								<th scope="col">Designation</th>
-								<th scope="col">Prix HT(Dhs)</th>
-								<th scope="col">Tva</th>
+								<th scope="col">Prix HT (Dhs)</th>
+								<th scope="col">Tva (%)</th>
 								<th scope="col">Quantité</th>
-								<th scope="col">Remise</th>
-								<th scope="col">Total TTC(Dhs)</th>
+								<th scope="col">Remise (%)</th>
+								<th scope="col">Total TTC (Dhs)</th>
 							</tr>
 						</thead>
-						<tbody class="text-primary">
+						<tbody class="text-danger">
 
 						</tbody>
 					</table>

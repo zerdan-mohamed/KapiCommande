@@ -1,108 +1,433 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <title>View commande</title>
-        
-        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap.css"
-        				th:href="@{/src/css/bootstrap.css}"/>
-        
-        <link rel="stylesheet" type="text/css" href="../static/src/css/bootstrap-datepicker.css" 
-        				th:href="@{src/css/bootstrap-datepicker.css}"/>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name='viewport'
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>View commande</title>
 
-        <link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
-						th:href="@{/src/css/app.css}"/>
-        
-        <link rel="stylesheet" type="text/css" href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
-        				th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}"/>
-        
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' 
-        				rel='stylesheet' type='text/css'/>
-        
-		<link rel="stylesheet" type="text/css" href="../static/src/css/fontawesome.css"
-        				th:href="@{/src/css/fontawesome.css}"/>
-        
-        
-        <link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
-        				th:href="@{/src/css/all.css}"/>
-        
-    </head>
-    <body>
-		<!-- *** Debut header *** -->
-        	<div lang="en" th:include="include/header"></div>
-        <!-- *** Fin header *** -->
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/bootstrap.css"
+	th:href="@{/src/css/bootstrap.css}" />
 
-        <!-- *** Debut menu sidebar *** -->
-        	<div lang="en" th:include="include/sidebar"></div>
-        <!-- *** Fin menu sidebar *** -->
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/bootstrap-datepicker.css"
+	th:href="@{src/css/bootstrap-datepicker.css}" />
 
-        <!-- *** Debut dashboard content *** -->
-        <div class="a_content">
+<link rel="stylesheet" type="text/css" href="../static/src/css/app.css"
+	th:href="@{/src/css/app.css}" />
 
-            <div class="alert alert-secondary" role="alert">
-                SAP systeme  <i class="ion-ios7-arrow-forward"> </i>
-            </div>
+<link rel="stylesheet" type="text/css"
+	href="../static/src/assets/ionicons-1.5.2/css/ionicons.min.css"
+	th:href="@{/src/assets/ionicons-1.5.2/css/ionicons.min.css}" />
 
-            <!-- *** Debut nouveau commande *** -->
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-info-circle"></i> card title
-                </div>
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css' />
 
-                <!-- *** Debut card body *** -->
-                <div class="card-body">
-                    <!-- *** Debut info client - Livraison *** -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-3">
-                              		<!-- <div lang="en" th:include="Navbar :: Navbar"></div> --> 
-                              		<!-- <div lang="en" th:include="Navbar"></div> -->     
-                                </div>
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/fontawesome.css"
+	th:href="@{/src/css/fontawesome.css}" />
 
-                                <div class="col-md-3 offset-md-6">
-                                    
-                                </div>
-                            </div>
 
-						</div>
-                    </div>
-                    <!-- *** Fin info client - Livraison *** -->
+<link rel="stylesheet" type="text/css" href="../static/src/css/all.css"
+	th:href="@{/src/css/all.css}" />
 
-                    <br>
+<link rel="stylesheet" type="text/css"
+	href="../static/src/css/cmdeStyle.css"
+	th:href="@{/src/css/cmdeStyle.css}" />
 
-                </div>
-                <!-- *** Fin card body *** -->
-            </div>
-            <!-- *** Debut nouveau commande *** -->
-        </div>
-        <!-- *** Fin dashboard content *** -->
+</head>
+<body>
+	<!-- *** Debut header *** -->
+	<div lang="en" th:include="include/header"></div>
+	<!-- *** Fin header *** -->
 
-        <!-- *** Debut dashboard footer *** -->
-			<div lang="en" th:include="include/footer"></div>         
-        <!-- *** Fin dashboard footer *** -->
-    </body>
+	<!-- *** Debut menu sidebar *** -->
+	<div lang="en" th:include="include/sidebar"></div>
+	<!-- *** Fin menu sidebar *** -->
 
-    <!-- *** JQuery bibliotheque *** -->
-    <script src="../static/src/js/jquery-3.3.1.js"
-    		th:src="@{/src/js/jquery-3.3.1.js}"></script>
+	<!-- *** Debut dashboard content *** -->
+	<div class="a_content">
 
-	<!-- *** Afficher sous menu *** -->
-    <script type="text/javascript" src="../static/src/js/app.js"
-    		th:src="@{/src/js/app.js}"></script>
+		<div class="alert alert-secondary" role="alert">
+			SAP systeme <i class="ion-ios7-arrow-forward"> </i> Commande
+		</div>
 
-    <!-- *** Bootstrap bibliotheque *** -->
-    <script defer src="../static/src/js/bootstrap.js"
-    		th:src="@{/src/js/bootstrap.js}"></script>
-     	
-    <!-- *** Fontawesome icons bibliotheque *** -->
-    <script type="text/javascript" src="../static/src/js/fontawesome.js"
-    		th:src="@{/src/js/fontawesome.js}"></script>
-    
-    <!-- *** internal js file *** -->
-    <script type="text/javascript" src="../static/src/js/all.js"
-    	th:src="@{/src/js/all.js}"></script>
-        	    
+		<!-- *** Debut nouveau commande *** -->
+		<div class="card">
+			<div class="card-header">
+				<i class="fas fa-shopping-cart"></i> Commande N° 
+				<span th:text="${commandeView.numCmde}"></span>
+				
+				<a class="btn-sm btn-success" style="float: right; color: white;" id="showCLadd"> <!-- th:href="@{newCommande}" -->
+					<i class="fas fa-plus-circle"></i>
+				</a>
+			</div>
+
+			<!-- *** Debut card body *** -->
+			<div class="card-body cmde_font">
+				<!-- *** Debut info client - Livraison *** -->
+				<div class="row" id="infoClient">
+					<div class="col-md-12">
+						<!-- <form> -->
+							<!-- Info Client - 2er ligne -->
+							<div class="row">
+								<!-- ** Information commande ** -->
+								<div class="col-md-4" style="padding: 0;">
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">
+											N° commande : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" disabled="disabled"
+												id="numCmde" th:value="${commandeView.numCmde}" />
+										</div>
+									</div>
+									
+									<input type="text" class="form-control" disabled="disabled"
+												id="idCmde" th:value="${commandeView.idCmde}" hidden="" />
+
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">
+											Date creation : </label>
+										<div class="col-sm-8">
+											<input type="date" class="form-control" id="dateCreation" disabled="disabled" />
+										</div>
+									</div>
+
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label"> Date livraison : </label>
+										<div class="col-sm-8">
+											<div class="d-flex">
+												<input type="date" class="form-control p-1" id="dateLivraison" />
+
+												<!-- <button class="btn btn-success.focus btn-sm ml-auto p-1" id="editDL">
+													<i class="fas fa-calendar-alt"></i>
+												</button> -->
+											</div>
+										</div>
+									</div>
+									
+									<script type="text/javascript" th:inline="javascript">
+										var dateCreation = [[${fdateCreation}]];
+										var dateLivraison = [[${fdateLivraison}]];
+
+									    document.getElementById("dateCreation").value = dateCreation;
+									    document.getElementById("dateLivraison").value = dateLivraison;
+									</script>
+ 
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label">
+											Status : </label>
+										<div class="col-sm-8">
+											<div class="d-flex">
+												<input type="text" class="form-control p-1" id="statusCmde" th:value="${commandeView.statusCmde}" disabled="disabled" />
+
+												<!-- <button type="submit" class="btn btn-success.focus btn-sm ml-auto p-1">
+													<i class="fas fa-pen"></i>
+												</button> -->
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group row" style="margin: 0;">
+										<label for="totalRemise" class="col-sm-4 col-form-label"> Nom client : </label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control" disabled="disabled" id="nomClient"
+												th:value="${clientView.nomClient} + ' ' + ${clientView.prenomClient}" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+						<!-- </form> -->
+					</div>
+				</div>
+				<!-- *** Fin command information *** -->
+				<br>
+				<br>
+				<br>
+				
+				<!-- *** add command line to existed command *** -->	
+				<form method="post" id="addlCmdeView"> 
+				<!-- <div class="row" id="addArticle"> -->
+				<div id="addCmdeLine" class="col-md-12 table-responsive-sm">
+					<table class="table table-striped table-bordered">
+						<thead class="thead font-weight-bold">
+							<tr>
+								<th scope="col">Designation</th>
+								<th scope="col">Prix HT</th>
+								<th scope="col">Tva</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Remise</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr th:field="*{listArticles}"> 
+								<td>
+									<select class="custom-select" id="selectArticle" name="selectArtice" style="height: 30px; width: 200px;">
+										<option value="">Selectionner un article</option>
+										<option id="selectArt" th:each="article : ${listArticles}" 
+												th:text="${article.libelleArticle}" th:value="${article.idArticle}" />
+									</select>
+								</td>
+								<td colspan="5"></td>
+								
+							</tr>
+		
+							<tr id="artSelected">
+								<!--   style="display: none;" -->
+								<td>
+									<input type="text" style="height: 30px;" class="form-control" id="libelArticle" name="libelArticle" disabled="disabled" />
+								</td>
+
+								<td>
+									<input type="text" id="prix" style="height: 30px;" class="form-control" name="prix" disabled="disabled" />
+								</td>
+
+								<td>
+									<input type="text" style="height: 30px;" class="form-control" id="tva" name="tva" disabled="disabled" />
+								</td>
+
+								<td>
+									<input type="text" style="height: 30px;" class="form-control" id="quantite" name="quantite" />
+								</td>
+
+								<td>
+									<input type="text" style="height: 30px;" class="form-control" id="remise" name="remise" />
+									<input type="text" class="form-control" id="idCmdeActuel" name="idCmdeActuel" th:value="${commandeView.idCmde}" style="display: none" />
+									<input type="text" style="display: none" class="form-control" id="idA" name="idA" />
+								</td>
+
+								<td>
+									<button type="submit" class="btn btn-success btn-sm">
+										<i class="fas fa-plus-circle"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- </div> -->
+				</form>
+				
+				<!-- edit command line quantite and remise -->	
+				<form method="post" id="editlCmdeView"> 
+					<div id="editCmdeLine" class="col-md-12 table-responsive-sm">
+						<table class="table table-striped table-bordered">
+							<thead class="thead font-weight-bold">
+								<tr>
+									<th scope="col">Designation</th>
+									<th scope="col">Prix HT</th>
+									<th scope="col">Tva</th>
+									<th scope="col">Quantité</th>
+									<th scope="col">Remise</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr id="artEdit">
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="editlibelArticle" name="editlibelArticle" disabled="disabled" />
+									</td>
+	
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" name="editprix" id="editprix" disabled="disabled" />
+									</td>
+	
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="edittva" name="editva" disabled="disabled" />
+									</td>
+	
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="editquantite" name="editquantite" />
+									</td>
+	
+									<td>
+										<input type="text" style="height: 30px;" class="form-control" id="editremise" name="editremise" />
+										<input type="text" class="form-control" id="idCmdeActuel" name="editidCmdeActuel" th:value="${commandeView.idCmde}" style="display: none" />
+										<input type="text" style="display: none" class="form-control" id="editidA" name="idA" />
+									</td>
+	
+									<td>
+										<button type="submit" class="btn btn-success btn-sm">
+											<i class="fas fa-edit"></i>
+										</button>
+									</td>
+								</tr>							
+							</tbody>
+						</table>
+					</div>
+				</form>
+				
+				<!-- <hr> -->
+				<div style="font-size: 16px; margin-bottom: 7px; margin-top: 5px;">
+					<span style="text-decoration: underline;" class="text-danger">
+						Liste des articles :
+					</span>
+						&nbsp;
+					<span class="badge badge-primary">
+						<span th:text="${listSize}"></span> articles
+					</span>
+				</div>
+				
+				<!-- <hr> -->
+				
+				<div class="row">
+					<div class="col-md-12 table-responsive-sm">
+						<table class="table table-hover table-striped" id="GLtable">
+							<thead class="thead font-weight-bold" style="background-color: #09AFDF; color: white;">
+								<tr>
+									<th scope="col">Designation</th>
+									<th scope="col">Prix HT (Dhs)</th>
+									<th scope="col">Tva (%)</th>
+									<th scope="col">Quantité</th>
+									<th scope="col">Remise (%)</th>
+									<th scope="col">Total TTC (Dhs)</th>
+									<th scope="col"> </th>
+									
+								</tr>
+							</thead>
+							<tbody class="text-danger" style="font-size: 14px;">
+								<!-- <tr th:each="l:${pageLignesCmde.content}">
+									<!-- scope="row" -->
+								<tr th:each="r:${pageLignesCmde}">
+									<th th:text="${r.Article.LibelleArticle}" scope="row"></th>
+									<th th:text="${r.Article.prixHT}" scope="row"></th>
+									<th th:text="${r.Article.tva}" scope="row"></th>
+									<th th:text="${r.quantite}" scope="row"></th>	
+									<th th:text="${r.remise}" scope="row"></th>
+									<th scope="row"></th>
+									<th scope="row" style="display: none;"> <input type="text" id="idLCajax" name="idLCajax" th:value="${r.idLigneCmde}" /> </th>
+									
+									<td>
+										<!-- Edit commande btn -->  
+										<a class="btn btn-sm btn-success editLCmde"> <!-- id="editLCmde" --> 
+											<span style="color: white;"><i class="fas fa-edit"></i> </span>
+										</a> 
+										
+										<!-- <a th:href="@{editLigneCommande(idLCmde=${r.idLigneCmde})}"> -->
+										
+										<!-- Delete commande btn --> 
+										<a th:href="@{delLigneCommande(idCmde=${r.Commande.idCmde}, idLCmde=${r.idLigneCmde})}" class="btn btn-sm btn-danger delLCmdeBtn">
+											<i class="fas fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+								
+								<tr class="table-active text-dark font-weight-bold font-italic">
+									<td>Total TTC des <span th:text="${listSize}"></span> articles :</td>
+									<th scope="col"></th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+									<th scope="col"><span th:text="${totalTTC}"></span> Dhs </th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<!-- ** Pagination liste client ** -->
+					<div style="justify-content: right;">
+						 <nav aria-label="Page navigation example"
+							class="navbar navbar-toggleable-md navbar-light bg-faded">
+							<ul class="pagination nav nav-pills">
+								<li class="nav-item"
+									th:classappend="${p}==${pageCourante}? 'active':''" th:each="p:${pages}">
+										<a class="page-link" th:classappend="${p}==${pageCourante}? 'active':''" th:text="${p}"
+											th:href="@{findCommande(idCmde=${commandeView.idCmde} ,page=${p})}">
+										</a>
+								</li>
+							</ul>
+						</nav> 
+					</div> 
+				</div>
+				
+				<br>
+
+			</div>
+			<!-- *** Fin card body *** -->
+		</div>
+		<!-- *** Debut nouveau commande *** -->
+	</div>
+	<!-- *** Fin dashboard content *** -->
+
+	<!-- *** Debut dashboard footer *** -->
+	<div lang="en" th:include="include/footer"></div>
+	<!-- *** Fin dashboard footer *** -->
+	
+	
+	
+	<!-- Modal delete commande -->
+	<div class="modal fade" id="delLCmdeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header bg-danger border-danger"
+					style="color: #fff;">
+					<h5 class="modal-title" id="exampleModalLabel">
+						<i class="fas fa-trash-alt"></i> Supprimer commande
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<h3>Voulez-vous vraiment supprimer cette commande ?</h3>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-secondary"
+						data-dismiss="modal">Non</button>
+					<!-- btn-default -->
+					<a href="" class="btn btn-sm btn-danger" id="delLCmdeRef"> Oui </a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+</body>
+
+<!-- *** JQuery bibliotheque *** -->
+<script src="../static/src/js/jquery-3.3.1.js"
+	th:src="@{/src/js/jquery-3.3.1.js}"></script>
+
+<!-- *** Afficher sous menu *** -->
+<script type="text/javascript" src="../static/src/js/app.js"
+	th:src="@{/src/js/app.js}"></script>
+
+<!-- *** Bootstrap bibliotheque *** -->
+<script defer src="../static/src/js/bootstrap.js"
+	th:src="@{/src/js/bootstrap.js}"></script>
+
+<!-- *** Fontawesome icons bibliotheque *** -->
+<script type="text/javascript" src="../static/src/js/fontawesome.js"
+	th:src="@{/src/js/fontawesome.js}"></script>
+
+<!-- *** internal js file *** -->
+<script type="text/javascript" src="../static/src/js/all.js"
+	th:src="@{/src/js/all.js}"></script>
+	
+<!-- *** Ajax POST ligne commande *** -->
+<script type="text/javascript" src="../static/src/js/articleAjax.js"
+	th:src="@{/src/js/addLCAjax.js}"></script>
+
+<!-- *** internal js file *** -->
+<script type="text/javascript" src="../static/src/js/modal.js"
+	th:src="@{/src/js/modal.js}"></script>
+
+<!-- *** ajax js file *** -->
+<script type="text/javascript" src="../static/src/js/commandeAjax.js"
+	th:src="@{/src/js/commandeAjax.js}"></script>
+
 </html>
-    

@@ -42,6 +42,7 @@ public class ClientController {
 		return "listeClient";
 	}
 	
+	
 	// *** Add client ***
 	@RequestMapping(value="/addClient", method=RequestMethod.GET)
 	public String addClient(Model model) {
@@ -68,78 +69,34 @@ public class ClientController {
 	}
 	
 	
-	// *** Find one client
+	// *** Find one client information ***
 	@RequestMapping(value="/findClient", method=RequestMethod.GET)
 	public String findClient(Model model, @RequestParam(name="idClient")Long idClient) {
 		Client client = clientRepository.findById(idClient).get();
 		model.addAttribute("eClient", client);
 		return "editClient";
 	}
-		
 
 	
-	// *** essai update client 1 ***
+	// *** Update client information ***
 	@RequestMapping(value="/editClient", method=RequestMethod.POST)
 	public String editClient(@RequestParam(name="idClient")Long idClient,
-			@RequestParam(name="nomClient")String nomClient, @RequestParam(name="prenomClient")String prenomClient,
-			@RequestParam(name="villeClient")String villeClient, @RequestParam(name="telClient")String telClient,
-			@RequestParam(name="mailClient")String mailClient) {
+			@RequestParam("nom")String nom,
+			@RequestParam(name="prenom")String prenom,
+			@RequestParam(name="ville")String ville,
+			@RequestParam(name="tel")String tel,
+			@RequestParam(name="mail")String mail) {
 		
-
-		//Client c = new Client();
-		Client c = clientRepository.findById(idClient).get(); 
-				
-		String tel = c.getTelClient();
-		c.setNomClient(nomClient);
-		c.setPrenomClient("Siham");
-		c.setVilleClient("Rabat");
+		Client c = clientRepository.findById(idClient).get(); 	
+		c.setNomClient(nom);
+		c.setPrenomClient(prenom);
+		c.setVilleClient(ville);
 		c.setTelClient(tel);
-		c.setMailClient("falah@gmail.com");
-		
+		c.setMailClient(mail);
 		clientRepository.save(c);
 					
 		return "redirect:listeClient";
 	}
-	
-	
-	@RequestMapping(value="/editClient2", method=RequestMethod.POST)
-	public String editClient2(@Valid Client client, BindingResult bindResult, @RequestParam(name="idClient")Long idClient,
-			@RequestParam(name="nomClient")String nomClient, @RequestParam(name="prenomClient")String prenomClient,
-			@RequestParam(name="villeClient")String villeClient, @RequestParam(name="telClient")String telClient,
-			@RequestParam(name="mailClient")String mailClient) {
-		clientRepository.updateCl(nomClient, prenomClient, villeClient, telClient, mailClient, idClient);
-		if(bindResult.hasErrors()) {
-			return "editClient";
-		}
-		return "redirect:listeClient";
-	}
-	
-	
-	
-	
-	
-	// *** essai update client 2 ***
-	/*
-	@RequestMapping(value="/editClient", method=RequestMethod.POST)
-	public String editClient(@Valid Client eclient, BindingResult bindResult) {	
-		
-		clientRepository.save(eclient);
-		
-		if(bindResult.hasErrors()) {
-			return "editClient";
-		}
-		return "redirect:listeClient";
-	}	
-	*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -37,7 +37,6 @@ $(document).ready(function() {
 					alert("Error de selection")
 				}
 				console.log(result);
-
 			},
 			error : function(e) {
 				alert("Error!")
@@ -79,7 +78,7 @@ $(document).ready(function() {
 					// alert("Ligne ajouté")
 					// $.each( result.data.article, function( key, value ) { alert( key + ": " + value ); }); 
 					
-
+					alert("command line article")
 					
 					var total = parseFloat(result.data.article["prixHT"] * result.data["quantite"]);
 					
@@ -107,7 +106,6 @@ $(document).ready(function() {
 				    var NTotalHT = parseFloat(document.getElementById('totalHT').value) + totalHT ;
 				    $("#totalHT").prop('value', NTotalHT);
 				    
-				    
 				    // set Total Remise prices
 				    var NTotalRm = parseFloat(document.getElementById('totalRm').value) + totalRm;
 				    $("#totalRm").prop('value', NTotalRm);
@@ -133,7 +131,9 @@ $(document).ready(function() {
 		// Reset FormData after Posting
 		resetData();
 	}
-	 
+
+	
+	// Vider input command line 
 	function resetData() {
 		$("#quantite").val("");
 		$("#remise").val("");

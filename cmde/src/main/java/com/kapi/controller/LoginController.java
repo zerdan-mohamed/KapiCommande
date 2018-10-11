@@ -50,7 +50,7 @@ public class LoginController {
 			//if username and password is correct, we are returning home page
 			
 			List<Client> listClients = clientRepository.findAll();
-			List<Commande> listCmdeCours = commandeRepository.commandesEnCours();
+			List<Commande> listCmdeCours = commandeRepository.commandesEnAttente();
 			List<Commande> listCmdeLivree = commandeRepository.commandesLivree();
 			List<Commande> listCmdePretALivree = commandeRepository.commandesPretALivree();
 			

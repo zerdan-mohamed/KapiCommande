@@ -61,39 +61,37 @@
 		                </div>
 		                <div class="col-md-9">
 		
-		                    <form th:object="${eClient}" th:action="@{editClient(idClient=${eClient.idClient}, nomClient=${eClient.nomClient}, prenomClient=${eClient.prenomClient}, villeClient=${eClient.villeClient}, telClient=${eClient.telClient}, mailClient=${eClient.mailClient} )}" method="post">
+		                    <form th:object="${eClient}" th:action="@{editClient(idClient=${eClient.idClient})}" method="post">
 		                        <div class="form-group">
 		                            <label for="nomClient">Nom :</label>
-		                            <input type="text" th:field="*{nomClient}" class="form-control" 
-		                            			aria-describedby="emailHelp"/>
+		                            <!-- <input type="text" th:field="*{nomClient}" class="form-control" /> -->
+		                            			
+		                            <input type="text" class="form-control" name="nom" id="nom" th:value="${eClient.nomClient}"/>
 		                            <span class="text-danger" th:errors="*{nomClient}" ></span>
 		                        </div>
 		                        
 		                        <div class="form-group">
 		                            <label for="prenomClient">Prenom :</label>
-		                            <input type="text" th:field="*{prenomClient}" class="form-control"
-		                            		 	aria-describedby="emailHelp"/>
+		                            <input type="text" class="form-control" name="prenom" id="prenom" th:value="${eClient.prenomClient}"/>		 	
+		                            		 	
 		                            <span class="text-danger" th:errors="*{prenomClient}" ></span>
 		                        </div>
 		                        
 		                        <div class="form-group">
 		                            <label for="villeClient">Ville :</label>
-		                            <input type="text" th:field="*{villeClient}" class="form-control"
-		                            			aria-describedby="emailHelp"/>
+		                            <input type="text" class="form-control" name="ville" id="ville" th:value="${eClient.villeClient}">
 		                            <span class="text-danger" th:errors="*{villeClient}" ></span>
 		                        </div>
 		                        
 		                        <div class="form-group">
 		                            <label for="telClient">Telephone :</label>
-		                            <input type="text" th:field="*{telClient}" class="form-control"
-		                            			aria-describedby="emailHelp"/>
+		                            <input type="text" class="form-control" name="tel" id="tel" th:value="${eClient.telClient}"/>
 		                            <span class="text-danger" th:errors="*{telClient}" ></span>
 		                        </div>
 		                        
 		                        <div class="form-group">
 		                            <label for="emailClient">Email :</label>
-		                            <input type="email" th:field="*{mailClient}" class="form-control"
-		                            			aria-describedby="emailHelp"/>
+		                            <input type="email" class="form-control" name="mail" id="mail" th:value="${eClient.mailClient}"/>
 		                            <span class="text-danger" th:errors="*{mailClient}" ></span>
 		                        </div>
 		

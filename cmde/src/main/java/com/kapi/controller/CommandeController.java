@@ -1,29 +1,29 @@
 package com.kapi.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kapi.dao.ArticleRepository;
 import com.kapi.dao.ClientRepository;
 import com.kapi.dao.CommandeRepository;
-import com.kapi.message.Response;
+import com.kapi.dao.LCommandeRepository;
 import com.kapi.model.Article;
 import com.kapi.model.Client;
 import com.kapi.model.Commande;
@@ -31,6 +31,9 @@ import com.kapi.model.LigneCommande;
 
 @Controller
 public class CommandeController {
+	
+	@Autowired
+	private LCommandeRepository ligneCmdeRepository;
 	
 	@Autowired
 	private CommandeRepository commandeRepository;
@@ -62,7 +65,7 @@ public class CommandeController {
 		Client client = clientRepository.findByIdClient(idClient);
 	    
 	    List<Commande> listCommandes = commandeRepository.findAll();
-	    List<Article> listArticles = articleRepository.findAll();
+	    List<Article> listArticles = articleRepository.findAll();	    
 	    
 	    System.out.println(dateLiv);
 	    
@@ -71,8 +74,8 @@ public class CommandeController {
 	    long idCmdeAc;
 	    
 	    if(listCommandes.size()!=0) {
-	      numCmdeAc = listCommandes.get(sizeList-1).getNumCmde()+1;
-	      idCmdeAc = listCommandes.get(sizeList-1).getIdCmde()+1;
+	    	numCmdeAc = listCommandes.get(sizeList-1).getNumCmde()+1;
+	    	idCmdeAc = listCommandes.get(sizeList-1).getIdCmde()+1;
 	    } else {
 	      numCmdeAc=  201800001;
 	      idCmdeAc= 1;
@@ -107,10 +110,10 @@ public class CommandeController {
 		Page<Commande> pageCommandes = commandeRepository.chercherCommandes("%"+mc+"%", PageRequest.of(p, 5));
 		
 		int pagesCount = pageCommandes.getTotalPages();
-		int[] pages = new int[pagesCount];
-		for(int i=0; i<pagesCount; i++) pages[i] = i;
+		int[] page = new int[pagesCount];
+		for(int i=0; i<pagesCount; i++) page[i] = i;
 				
-		model.addAttribute("pages", pages);
+		model.addAttribute("page", page);
 		model.addAttribute("pageCourante", p);
 		model.addAttribute("motCle", mc);
 		model.addAttribute("pageCommandes", pageCommandes);
@@ -119,33 +122,82 @@ public class CommandeController {
 	}
 	
 	
-	// *** Delete client ***
+	// *** Delete commande ***
 	@RequestMapping(value="/delCommande", method=RequestMethod.GET)
 	public String delCommande(@RequestParam(name="idCmde")long idCmde) {
-		
-		commandeRepository.deleteById(idCmde);
+		commandeRepository.deleteById(idCmde);		
 		return "redirect:listeCommande";
+	}
+	
+	// *** Delete ligneCommande ***
+	@RequestMapping(value="/delLigneCommande", method=RequestMethod.GET)
+	public String delLigneCommande(@RequestParam(name="idLCmde")long idLCmde, Model model,
+								   @RequestParam(name="idCmde")long idCmde) {
+		
+		Commande commandefind = commandeRepository.findByIdCmde(idCmde);
+		long idCommande = commandefind.getIdCmde();
+		
+		ligneCmdeRepository.deleteById(idLCmde);
+		
+		return "redirect:/listeCommande";
 	}
 	
 	// *** Find one client
 	@RequestMapping(value="/findCommande", method=RequestMethod.GET)
-	public String findCommande(Model model, @RequestParam(name="idCmde")Long idCmde) {
-		//Client client = clientRepository.findById(idCmde).get();
-		Commande commandeView = commandeRepository.findByIdCmde(idCmde);
+	public String findCommande(Model model, @RequestParam(name="idCmde")Long idCmde,
+			@RequestParam(name="page", defaultValue="0")int p) {
 		
+		Commande commandeView = commandeRepository.findByIdCmde(idCmde); //.get();
+		
+		Page<LigneCommande> pageLignesCmde = ligneCmdeRepository.chercherLCommande(commandeView, PageRequest.of(p, 5));
+		List<LigneCommande> listLignesCmde = ligneCmdeRepository.chercherLCommandes(commandeView);
+		
+		int pagesCount = pageLignesCmde.getTotalPages();
+		int listSize = listLignesCmde.size();
+		int[] pages = new int[pagesCount];
+		
+		for(int i=0; i<pagesCount; i++) pages[i] = i;
+		
+		
+		// ** Calcul Total TTC **
+		
+		Double total = (double) 0, totalRm = (double) 0, totalHT = (double) 0, totalTVA = (double) 0, totalTTC = (double) 0;
+		for(int i=0; i<listSize ; i++ ) {
+			total = listLignesCmde.get(i).getArticle().getPrixHT() * listLignesCmde.get(i).getQuantite();
+			totalRm = (total * listLignesCmde.get(i).getRemise())/100;
+			totalHT = total - totalRm;
+			totalTVA = (totalHT * listLignesCmde.get(i).getArticle().getTva())/100;
+			
+			totalTTC += totalHT + totalTVA;
+		}
+		
+		model.addAttribute("totalTTC", totalTTC);
+		
+		model.addAttribute("pages", pages);
+		model.addAttribute("listSize", listSize);
+		model.addAttribute("pageCourante", p);
+		model.addAttribute("pageLignesCmde", pageLignesCmde);
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date dateCreation = commandeView.getEnregistreDate();
+        String fdateCreation = formatter.format(dateCreation);
+        
+        Date dateLivraison = commandeView.getLivraisonDate();
+        String fdateLivraison = formatter.format(dateLivraison);
+        
+		Client clientView = commandeView.getClient();
+		List<Article> listArticles = articleRepository.findAll();
+
 		model.addAttribute("commandeView", commandeView);
+		model.addAttribute("fdateCreation", fdateCreation);
+		model.addAttribute("fdateLivraison", fdateLivraison);
+		model.addAttribute("clientView", clientView);
+		model.addAttribute("listLignesCmde", listLignesCmde);
+		model.addAttribute("listArticles", listArticles);
+		
 		return "viewCommande";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -42,6 +42,7 @@ public class Commande implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date livraisonDate;
 	
+//	EAGER 
 	@OneToMany(mappedBy="commande", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<LigneCommande> ligneCmde;
 	
