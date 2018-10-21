@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name='viewport'
+<meta name='viewport'	
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>View commande</title>
 
@@ -213,7 +213,7 @@
 				<!-- </div> -->
 				</form>
 				
-				<!-- edit command line quantite and remise -->	
+				<!-- *** edit command line quantite and remise *** -->	
 				<form method="post" id="editlCmdeView"> 
 					<div id="editCmdeLine" class="col-md-12 table-responsive-sm">
 						<table class="table table-striped table-bordered">
@@ -245,16 +245,23 @@
 									<td>
 										<input type="text" style="height: 30px;" class="form-control" id="editquantite" name="editquantite" />
 									</td>
+									
+									<!-- <th scope="row"> <input id="idLCajax" th:value="${r.idLigneCmde}" /> </th> class="idLCajax" -->
 	
 									<td>
 										<input type="text" style="height: 30px;" class="form-control" id="editremise" name="editremise" />
+										
 										<input type="text" class="form-control" id="idCmdeActuel" name="editidCmdeActuel" th:value="${commandeView.idCmde}" style="display: none" />
-										<input type="text" style="display: none" class="form-control" id="editidA" name="idA" />
+										<input type="text" class="form-control" id="editidA" name="idA"  style="display: none" /> <!-- idArticle -->
 									</td>
-	
+									
+									<td> <!-- style="display: none;" -->
+										<input type="text" class="form-control" id="editidLineC" name="editidLineC" />
+									</td>
+									
 									<td>
-										<button type="submit" class="btn btn-success btn-sm">
-											<i class="fas fa-edit"></i>
+										<button type="submit" class="btn btn-success btn-sm" id="valideupdateLC">
+											<i class="fas fa-check"></i>
 										</button>
 									</td>
 								</tr>							
@@ -286,30 +293,23 @@
 									<th scope="col">Tva (%)</th>
 									<th scope="col">Quantité</th>
 									<th scope="col">Remise (%)</th>
-									<th scope="col">Total TTC (Dhs)</th>
 									<th scope="col"> </th>
 									
 								</tr>
 							</thead>
 							<tbody class="text-danger" style="font-size: 14px;">
-								<!-- <tr th:each="l:${pageLignesCmde.content}">
-									<!-- scope="row" -->
-								<tr th:each="r:${pageLignesCmde}">
+								<tr th:each="r, itr:${pageLignesCmde.content}">
 									<th th:text="${r.Article.LibelleArticle}" scope="row"></th>
 									<th th:text="${r.Article.prixHT}" scope="row"></th>
 									<th th:text="${r.Article.tva}" scope="row"></th>
 									<th th:text="${r.quantite}" scope="row"></th>	
 									<th th:text="${r.remise}" scope="row"></th>
-									<th scope="row"></th>
-									<th scope="row" style="display: none;"> <input type="text" id="idLCajax" name="idLCajax" th:value="${r.idLigneCmde}" /> </th>
 									
 									<td>
-										<!-- Edit commande btn -->  
-										<a class="btn btn-sm btn-success editLCmde"> <!-- id="editLCmde" --> 
-											<span style="color: white;"><i class="fas fa-edit"></i> </span>
-										</a> 
-										
-										<!-- <a th:href="@{editLigneCommande(idLCmde=${r.idLigneCmde})}"> -->
+										<!-- Edit commande btn -->
+										<button type="submit" class="btn btn-sm btn-success editLCmde" th:value="${r.idLigneCmde}"> 
+											 <span style="color: white;"><i class="fas fa-edit"></i> </span>
+										</button> 
 										
 										<!-- Delete commande btn --> 
 										<a th:href="@{delLigneCommande(idCmde=${r.Commande.idCmde}, idLCmde=${r.idLigneCmde})}" class="btn btn-sm btn-danger delLCmdeBtn">
@@ -320,7 +320,6 @@
 								
 								<tr class="table-active text-dark font-weight-bold font-italic">
 									<td>Total TTC des <span th:text="${listSize}"></span> articles :</td>
-									<th scope="col"></th>
 									<th scope="col"></th>
 									<th scope="col"></th>
 									<th scope="col"></th>

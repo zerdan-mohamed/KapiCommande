@@ -1,21 +1,61 @@
 $(document).ready(function() {
 	
+	/*  
+	   * *********************************************************************************** *
+	   ***************** Update commande line in view command : Ajax POST ********************
+	   * *********************************************************************************** *
+	*/
+	$('#valideupdateLC').on('click', function(event){	
+		// Prevent the form from submitting via the browser.
+	    event.preventDefault();
+	    
+	    UpdateLCPost();
+	});
+	
+	
+	function UpdateLCPost() {
+		// PREPARE FORM DATA
+	    var formData = {
+	      editLC : $("#editidLineC").val(),
+	      editQtte : $("#editquantite").val(),
+	      editRemise : $("#editremise").val()
+	    }
+	    
+	    // DO POST
+	    $.ajax({
+	      type : "POST",
+	      contentType : "application/json",
+	      url : "api/article/updateLCmdeV",
+	      data : JSON.stringify(formData),
+	      dataType : 'json',
+	      success : function(result) {        
+	        if (result.status == "CommandeU") { 
+	          alert("Ligne de commande modifié")
+	          $("#editCmdeLine").css("display", "none");
+	        } else {
+	          alert("Error d'ajout")
+	        }
+	        console.log(result);
+	      },
+	      error : function(e) {
+	        alert("Error!")
+	        console.log("ERROR: ", e);
+	      }
+	    });
+	    // Reset FormData after Posting
+	    resetData();
+	  }
+	
+	// *******************************************************
+	
+	
+	
+	
 	
 	// *** show add command line ***
 	$('#showCLadd').on('click', function(){
 		$("#addCmdeLine").css("display", "block");
 	});
-	
-	// *** show edit command line ***
-	/*
-	$('.editLCmde').on('click', function(){
-		$("#editCmdeLine").css("display", "block");		
-		var idLC = $("#idLCajax").val();
-		alert("ckvcxcx")
-		// $("#editquantite").val(idLC);
-		
-	});
-	*/
 	
 	
 	/*  
@@ -27,13 +67,17 @@ $(document).ready(function() {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		
+		elem = $(this).val();
+		
 		// ** Select ligne command ** 
 		SelectOArtPost();
 	});
 	
+	
 	function SelectOArtPost() {
 		var formData = {
-			idLC : $("#idLCajax").val()
+				// idLC : $(".idLCajax").val()
+				idLC : elem
 		}
 
 		$.ajax({
@@ -53,8 +97,7 @@ $(document).ready(function() {
 					$("#edittva").val(result.data.article["tva"]);
 					$("#editquantite").val(result.data["quantite"]);
 					$("#editremise").val(result.data["remise"]);
-					
-					
+					$("#editidLineC").val(result.data["idLigneCmde"]);
 				} else {
 					alert("Error de selection")
 				}
@@ -77,6 +120,7 @@ $(document).ready(function() {
 		// Prevent the form from submitting via the browser.
 		event.preventDefault();
 		
+		iteration
 		/* ** Select article ** */
 		ajaxSelectPost();
 	});
@@ -84,7 +128,7 @@ $(document).ready(function() {
 	function ajaxSelectPost() {
 		// PREPARE FORM DATA
 		var formData = {
-			idArticle : $("#selectArticle").val()
+				idArticle : $("#selectArticle").val()
 		}
 
 		// DO POST
@@ -101,6 +145,7 @@ $(document).ready(function() {
 					$("#libelArticle").val(result.data["libelleArticle"]);
 					$("#prix").val(result.data["prixHT"]);
 					$("#tva").val(result.data["tva"]);
+					$("#idA").val(result.data["idArticle"]);
 					$("#idA").val(result.data["idArticle"]);
 				} else {
 					alert("Error de selection")

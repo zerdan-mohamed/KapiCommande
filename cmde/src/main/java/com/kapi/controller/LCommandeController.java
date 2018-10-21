@@ -142,6 +142,28 @@ public class LCommandeController {
 	}
 	
 	
+	// ** Save ligne commande **
+	@RequestMapping(value="/updateLCmdeV", method=RequestMethod.POST)
+	@ResponseBody
+	public Response updateLigneCommande(@RequestBody Map<String, String> json, Model model) {	
+
+		long editLC = Long.parseLong(json.get("editLC"));
+		long editQtte = Long.parseLong(json.get("editQtte"));
+		Double editRemise = Double.parseDouble(json.get("editRemise"));
+		
+		LigneCommande lCmdeUpdate = lCommandeRepository.findByIdLCmde(editLC);
+		
+		lCmdeUpdate.setQuantite(editQtte);
+		lCmdeUpdate.setRemise(editRemise);
+		
+		lCommandeRepository.save(lCmdeUpdate);
+	
+		
+		Response response = new Response("CommandeU", lCmdeUpdate);
+		return response;
+	}
+	
+	
 	// ** Save ligne commande in view command **
 	@RequestMapping(value="/saveLCmdeV", method=RequestMethod.POST)
 	@ResponseBody
